@@ -8,77 +8,67 @@ class StartPage extends StatefulWidget {
 class _StartPageState extends State<StartPage> {
   @override
   Widget build(BuildContext context) {
-    DateTime dt = new DateTime.now();
-    String dateFormatted = "${dt.day}.${dt.month}.${dt.year}";
-    String timeFormatted = "${dt.hour}:${dt.minute}:${dt.second}";
+    // DateTime dt = new DateTime.now();
+    // String dateFormatted = "${dt.day}.${dt.month}.${dt.year}";
+    // String timeFormatted = "${dt.hour}:${dt.minute}:${dt.second}";
     return Scaffold(
         appBar: AppBar(
             title: Center(
           child: Text(
-            'App',
+            'App by John',
             style: TextStyle(
               fontWeight: FontWeight.bold,
               color: Colors.white,
             ),
           ),
         )),
-        body: Center(
-          child: Container(
-              margin: EdgeInsets.all(100),
-              child: Column(
-                children: [
-                  Container(
-                      padding: EdgeInsets.all(10),
-                      margin: EdgeInsets.only(bottom: 5),
-                      color: Colors.black,
-                      child: Text(
-                        'Hallo welt!',
-                        style: TextStyle(
-                            fontSize: 30,
-                            fontWeight: FontWeight.bold,
-                            color: Colors.white),
-                      )),
-                  Container(
-                    padding: EdgeInsets.all(10),
-                    margin: EdgeInsets.only(bottom: 5),
-                    color: Colors.red,
-                    child: Text(
-                      'D: ' + dateFormatted,
-                      style: TextStyle(
-                          fontSize: 25,
-                          fontWeight: FontWeight.bold,
-                          color: Colors.white),
-                    ),
-                  ),
-                  Container(
-                    padding: EdgeInsets.all(10),
-                    color: Colors.yellow,
-                    child: Text(
-                      'T: ' + timeFormatted,
-                      style: TextStyle(
-                        fontSize: 28,
-                        fontWeight: FontWeight.bold,
-                      ),
-                    ),
-                  ),
-                  Container(
-                    margin: EdgeInsets.only(top: 50),
-                    //  color: Colors.blue,
-                    decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(5.0),
-                      color: Colors.blue,
-                    ),
-                    child: FlatButton(
-                      onPressed: null,
-                      child: Text(
-                        'PRESS ME',
-                        style: TextStyle(
-                            fontWeight: FontWeight.bold, color: Colors.white),
-                      ),
-                    ),
-                  )
-                ],
-              )),
+        body: Column(
+          crossAxisAlignment: CrossAxisAlignment.stretch,
+          children: [
+            MyText(Colors.yellow, 'Riga'),
+            MyText(Colors.green, 'Tallinn'),
+            MyText(Colors.red, 'Vilnius'),
+            MyButton('PUSH ME')
+          ],
         ));
+  }
+}
+
+class MyText extends StatelessWidget {
+  final Color _bgColor;
+  final String _myMessage;
+  MyText(this._bgColor, this._myMessage);
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      color: _bgColor,
+      child: Text(
+        _myMessage,
+        textAlign: TextAlign.center,
+        style: TextStyle(fontSize: 20.0, fontWeight: FontWeight.bold),
+      ),
+    );
+  }
+}
+
+class MyButton extends StatelessWidget {
+  final String _buttonName;
+  MyButton(this._buttonName);
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      margin: EdgeInsets.only(top: 50),
+      //  color: Colors.blue,
+      decoration: BoxDecoration(
+          borderRadius: BorderRadius.circular(5.0), color: Colors.blue),
+      child: FlatButton(
+          onPressed: null,
+          child: Text(
+            _buttonName,
+            style: TextStyle(fontSize: 15.0, fontWeight: FontWeight.bold),
+          )),
+    );
   }
 }
