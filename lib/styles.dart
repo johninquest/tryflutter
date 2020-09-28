@@ -4,7 +4,6 @@ const double DefaultFontSize = 20.0;
 const double HeaderFontSize = 25.0;
 const double BodyFontSize = 20.0;
 
-
 const MyAppBarStyle = TextStyle(
   fontSize: HeaderFontSize, 
   fontWeight: FontWeight.bold, 
