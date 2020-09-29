@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:tryflutter/tools.dart';
 import './styles.dart';
-import './tools.dart';
 
 class StartPage extends StatefulWidget {
   @override
@@ -14,18 +12,14 @@ class _StartPageState extends State<StartPage> {
     return Scaffold(
         appBar: AppBar(
             title: Center(
-          child: Text(
-            'App',
-            style: MyAppBarStyle
-          ),
+          child: Text('HomePage', style: MyAppBarStyle),
         )),
         body: Column(
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
-            MyText(Colors.yellow, ' HELLO WORLD! '),
+            MyText(Colors.yellow, ' Hello Barbara! '),
             MyTime(),
-            MyButton('GO TO SECOND PAGE'),
-            DisplayMyIP
+            MyButton('Go to Page 2'),
           ],
         ));
   }
@@ -39,14 +33,15 @@ class MyText extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      margin: EdgeInsets.all(20),
-      color: _bgColor,
-      child: Center(child: Text(
-        _myMessage,
-        textAlign: TextAlign.center,
-        style: TextStyle(fontSize: 20.0, fontWeight: FontWeight.bold),
-      ),)
-    );
+        margin: EdgeInsets.all(20),
+        color: _bgColor,
+        child: Center(
+          child: Text(
+            _myMessage,
+            textAlign: TextAlign.center,
+            style: TextStyle(fontSize: 20.0, fontWeight: FontWeight.bold),
+          ),
+        ));
   }
 }
 
@@ -63,9 +58,9 @@ class MyButton extends StatelessWidget {
           borderRadius: BorderRadius.circular(5.0), color: Colors.blue),
       child: FlatButton(
           onPressed: () => {
-            Navigator.of(context).push(
-              MaterialPageRoute(builder: (context) => SecondPage()))
-          },
+                Navigator.of(context)
+                    .push(MaterialPageRoute(builder: (context) => SecondPage()))
+              },
           child: Text(
             _buttonName,
             style: TextStyle(
@@ -85,9 +80,9 @@ class MyTime extends StatelessWidget {
     // String timeFormatted = "${dt.hour}:${dt.minute}:${dt.second}";
     // String displayDateTime = dateFormatted + 'T' + timeFormatted;
     return Container(
-      margin: EdgeInsets.only(top: 50),
+      margin: EdgeInsets.all(20),
       child: Text(
-        dateFormatted,
+        'Date: ' + dateFormatted,
         style: MyTimeStyle,
         textAlign: TextAlign.center,
       ),
@@ -100,11 +95,33 @@ class SecondPage extends StatelessWidget {
   // SecondPage(this._dummyText);
   @override
   Widget build(BuildContext context) {
-    return Column(
-      children: [
-        Container(child: Text('Welcome to the Second Page'),),
-        Container(child: FlatButton(onPressed: null, child: Text('BACK TO FIRST PAGE')),)
-      ],
-    );
+    DateTime dt = new DateTime.now();
+    String timeString = "${dt.hour}:${dt.minute}:${dt.second}";
+    return Scaffold(
+        appBar: AppBar(
+          title: Text(
+            'Page 2',
+            style: MyAppBarStyle,
+          ),
+        ),
+        body: Column(
+          children: [
+            Container(
+              margin: EdgeInsets.all(20),
+              child: Center(
+                  child: Text(
+                'Welcome to Page 2',
+                style: MyTextStyle,
+              )),
+            ),
+            Container(
+              margin: EdgeInsets.only(top: 10),
+              child: Text(
+                'Time: ' + timeString,
+                style: MyTextStyle,
+              ),
+            )
+          ],
+        ));
   }
 }
