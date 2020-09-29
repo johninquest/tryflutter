@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:tryflutter/tools.dart';
 import './styles.dart';
+import './tools.dart';
 
 class StartPage extends StatefulWidget {
   @override
@@ -18,13 +20,12 @@ class _StartPageState extends State<StartPage> {
           ),
         )),
         body: Column(
-          crossAxisAlignment: CrossAxisAlignment.stretch,
+          crossAxisAlignment: CrossAxisAlignment.center,
           children: [
-            MyText(Colors.yellow, 'Riga'),
-            MyText(Colors.green, 'Tallinn'),
-            MyText(Colors.red, 'Vilnius'),
+            MyText(Colors.yellow, ' HELLO WORLD! '),
             MyTime(),
-            MyButton('PUSH ME')
+            MyButton('GO TO SECOND PAGE'),
+            DisplayMyIP
           ],
         ));
   }
@@ -38,12 +39,13 @@ class MyText extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
+      margin: EdgeInsets.all(20),
       color: _bgColor,
-      child: Text(
+      child: Center(child: Text(
         _myMessage,
         textAlign: TextAlign.center,
         style: TextStyle(fontSize: 20.0, fontWeight: FontWeight.bold),
-      ),
+      ),)
     );
   }
 }
@@ -55,12 +57,15 @@ class MyButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      margin: EdgeInsets.only(top: 50),
-      //  color: Colors.blue,
+      margin: EdgeInsets.all(20),
+      // color: Colors.blue,
       decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(5.0), color: Colors.blue),
       child: FlatButton(
-          onPressed: null,
+          onPressed: () => {
+            Navigator.of(context).push(
+              MaterialPageRoute(builder: (context) => SecondPage()))
+          },
           child: Text(
             _buttonName,
             style: TextStyle(
@@ -86,6 +91,20 @@ class MyTime extends StatelessWidget {
         style: MyTimeStyle,
         textAlign: TextAlign.center,
       ),
+    );
+  }
+}
+
+class SecondPage extends StatelessWidget {
+  // final String _dummyText;
+  // SecondPage(this._dummyText);
+  @override
+  Widget build(BuildContext context) {
+    return Column(
+      children: [
+        Container(child: Text('Welcome to the Second Page'),),
+        Container(child: FlatButton(onPressed: null, child: Text('BACK TO FIRST PAGE')),)
+      ],
     );
   }
 }
