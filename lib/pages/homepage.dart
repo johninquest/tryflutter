@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import './styles.dart';
+import 'styles.dart';
+import '../pages/page2.dart';
 
 class StartPage extends StatefulWidget {
   @override
@@ -87,41 +88,5 @@ class MyTime extends StatelessWidget {
         textAlign: TextAlign.center,
       ),
     );
-  }
-}
-
-class SecondPage extends StatelessWidget {
-  // final String _dummyText;
-  // SecondPage(this._dummyText);
-  @override
-  Widget build(BuildContext context) {
-    DateTime dt = new DateTime.now();
-    String timeString = "${dt.hour}:${dt.minute}:${dt.second}";
-    return Scaffold(
-        appBar: AppBar(
-          title: Text(
-            'Page 2',
-            style: MyAppBarStyle,
-          ),
-        ),
-        body: Column(
-          children: [
-            Container(
-              margin: EdgeInsets.all(20),
-              child: Center(
-                  child: Text(
-                'Welcome to Page 2',
-                style: MyTextStyle,
-              )),
-            ),
-            Container(
-              margin: EdgeInsets.only(top: 10),
-              child: Text(
-                'Time: ' + timeString,
-                style: MyTextStyle,
-              ),
-            )
-          ],
-        ));
   }
 }
