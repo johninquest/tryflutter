@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:tryflutter/services/web.dart';
 import 'styles.dart';
 import '../services/tools.dart';
+import 'package:http/http.dart' as http;
+import 'dart:async';
+import 'dart:convert';
 
 class SecondPage extends StatefulWidget {
   @override
@@ -11,7 +13,7 @@ class SecondPage extends StatefulWidget {
 class _SecondPageState extends State<SecondPage> {
   // final String _dummyText;
   // SecondPage(this._dummyText);
-  Future<PublicIpObject> publicIpData;
+  Future<IpDataModel> publicIpData;
 
   @override
   Widget build(BuildContext context) {
@@ -47,18 +49,41 @@ class _SecondPageState extends State<SecondPage> {
             ),
             Container(
               margin: EdgeInsets.only(top: 50),
-              child: FutureBuilder<PublicIpObject>(
+              child: FutureBuilder<IpDataModel>(
                   future: publicIpData,
                   builder: (context, snapshot) {
                     if (snapshot.hasData) {
-                      return Text(snapshot.data.ip);
+                        return Text(snapshot.data.ip);
                     } else if (snapshot.hasError) {
-                      return Text("${snapshot.error}");
+                        return Text("${snapshot.error}");
                     }
                     return CircularProgressIndicator();
                   }),
             ),
           ],
-        ));
+        ));        
   }
 }
+
+
+Future<IpDataModel> getIpAddress() async {
+  final reqUrl = 'https://api.ipify.org?format=json';
+  final myResponse = await http.get(reqUrl);
+  if (myResponse.statusCode == 200) {
+    // debugPrint(myResponse.body.toString());
+    return IpDataModel.fromJson(json.decode(myResponse.body));
+  } else {
+    // debugPrint('Failed to get IP address!');
+    throw Exception('Failed to get IP address!');
+  }
+}
+
+class IpDataModel {
+  final String ip;
+  IpDataModel({this.ip});
+  factory IpDataModel.fromJson(Map<String, dynamic> json) {
+    return IpDataModel(ip: json['ip']);
+  }
+}
+
+

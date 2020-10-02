@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import 'styles.dart';
 import '../pages/page2.dart';
-import 'dart:async';
+// import 'dart:async';
+import 'package:rflutter_alert/rflutter_alert.dart';
 
 class HomePage extends StatefulWidget {
   @override
@@ -19,10 +20,10 @@ class _HomePageState extends State<HomePage> {
         body: Column(
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
-            MyText(Colors.yellow, ' Hello Barbara! '),
+            MyText(Colors.yellow, 'Leben und leben lassen'),
             MyTime(),
             MyButton('Go to Page 2'),
-            LiveTime()
+            AlertButton()
           ],
         ));
   }
@@ -93,22 +94,29 @@ class MyTime extends StatelessWidget {
   }
 }
 
-class LiveTime extends StatelessWidget {
+class AlertButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    DateTime ts = new DateTime.now();
+/*     DateTime ts = new DateTime.now();
     flipTime() {
       Timer.periodic(
           Duration(seconds: 1), (Timer t) => {ts = new DateTime.now()});
       debugPrint(ts.toString());
-    }
-
+      } */
     return Container(
         margin: EdgeInsets.all(20),
         child: RaisedButton(
-          onPressed: flipTime(),
-          child: Text('PUSH'),
-        ));
+              child: Text('PUSH'),
+              onPressed: () => _onBasicAlertPressed(context),
+            ));
   }
-  // void flipTime() {}
+
+  _onBasicAlertPressed(context) {
+    Alert(
+      context: context,
+      title: "My name is Barbara",
+      desc: "I am awesome",
+    ).show();
+  }
+
 }
