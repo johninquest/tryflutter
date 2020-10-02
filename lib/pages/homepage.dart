@@ -1,13 +1,14 @@
 import 'package:flutter/material.dart';
 import 'styles.dart';
 import '../pages/page2.dart';
+import 'dart:async';
 
-class StartPage extends StatefulWidget {
+class HomePage extends StatefulWidget {
   @override
-  _StartPageState createState() => _StartPageState();
+  _HomePageState createState() => _HomePageState();
 }
 
-class _StartPageState extends State<StartPage> {
+class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -21,6 +22,7 @@ class _StartPageState extends State<StartPage> {
             MyText(Colors.yellow, ' Hello Barbara! '),
             MyTime(),
             MyButton('Go to Page 2'),
+            LiveTime()
           ],
         ));
   }
@@ -89,4 +91,24 @@ class MyTime extends StatelessWidget {
       ),
     );
   }
+}
+
+class LiveTime extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    DateTime ts = new DateTime.now();
+    flipTime() {
+      Timer.periodic(
+          Duration(seconds: 1), (Timer t) => {ts = new DateTime.now()});
+      debugPrint(ts.toString());
+    }
+
+    return Container(
+        margin: EdgeInsets.all(20),
+        child: RaisedButton(
+          onPressed: flipTime(),
+          child: Text('PUSH'),
+        ));
+  }
+  // void flipTime() {}
 }

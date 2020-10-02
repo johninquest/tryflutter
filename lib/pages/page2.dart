@@ -3,7 +3,12 @@ import 'package:tryflutter/services/web.dart';
 import 'styles.dart';
 import '../services/tools.dart';
 
-class SecondPage extends StatelessWidget {
+class SecondPage extends StatefulWidget {
+  @override
+  _SecondPageState createState() => _SecondPageState();
+}
+
+class _SecondPageState extends State<SecondPage> {
   // final String _dummyText;
   // SecondPage(this._dummyText);
   Future<PublicIpObject> publicIpData;
@@ -50,7 +55,7 @@ class SecondPage extends StatelessWidget {
                     } else if (snapshot.hasError) {
                       return Text("${snapshot.error}");
                     }
-                   return CircularProgressIndicator();
+                    return CircularProgressIndicator();
                   }),
             ),
           ],
