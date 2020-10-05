@@ -15,6 +15,7 @@ class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      drawer: NavDrawer(),
         appBar: AppBar(
             title: Center(
           child: Text('HomePage', style: MyAppBarStyle),
@@ -25,9 +26,47 @@ class _HomePageState extends State<HomePage> {
           children: [
             MyButton('Go to Page 2'),
             AlertButton(),
-            LiveTime()
+           LiveTime()
           ],
         )));
+  }
+}
+
+class NavDrawer extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return Drawer(
+      child: ListView(
+        children: <Widget>[
+          DrawerHeader(
+            decoration: BoxDecoration(
+              color: Colors.blue
+            ),
+            child: Text('Menu', 
+            style: TextStyle(fontSize: 30, fontWeight: FontWeight.bold, color: Colors.white))),
+            ListTile(
+              leading: Icon(Icons.add_alert),
+            title: Text('Alert'), 
+            onTap: () => print('Alert button tapped!'),),
+            ListTile(
+            leading: Icon(Icons.info),
+            title: Text('Help'), 
+            onTap: () => {
+              print('Help button tapped!')
+              },), 
+              ListTile(
+                leading: Icon(Icons.directions_walk),
+                title: Text('Go to page 2'),
+                onTap: () => {
+                  Navigator.of(context)
+                    .push(MaterialPageRoute(builder: (context) => SecondPage())),
+                  print('Navigated to page 2')  
+                },
+              )           
+        ],
+      ),
+      
+    );
   }
 }
 
@@ -45,7 +84,8 @@ class MyButton extends StatelessWidget {
       child: FlatButton(
           onPressed: () => {
                 Navigator.of(context)
-                    .push(MaterialPageRoute(builder: (context) => SecondPage()))
+                    .push(MaterialPageRoute(builder: (context) => SecondPage())), 
+                print('Navigated to page 2') 
               },
           child: Text(
             _buttonName,
