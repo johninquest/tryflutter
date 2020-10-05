@@ -1,4 +1,6 @@
+import 'dart:async';
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 import 'styles.dart';
 import '../pages/page2.dart';
 // import 'dart:async';
@@ -17,35 +19,15 @@ class _HomePageState extends State<HomePage> {
             title: Center(
           child: Text('HomePage', style: MyAppBarStyle),
         )),
-        body: Column(
-          crossAxisAlignment: CrossAxisAlignment.center,
+        body: Center(child: Column(
+          // crossAxisAlignment: CrossAxisAlignment.center,
+          // mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            MyText(Colors.yellow, 'Leben und leben lassen'),
-            MyTime(),
             MyButton('Go to Page 2'),
-            AlertButton()
+            AlertButton(),
+            LiveTime()
           ],
-        ));
-  }
-}
-
-class MyText extends StatelessWidget {
-  final Color _bgColor;
-  final String _myMessage;
-  MyText(this._bgColor, this._myMessage);
-
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-        margin: EdgeInsets.all(20),
-        color: _bgColor,
-        child: Center(
-          child: Text(
-            _myMessage,
-            textAlign: TextAlign.center,
-            style: TextStyle(fontSize: 20.0, fontWeight: FontWeight.bold),
-          ),
-        ));
+        )));
   }
 }
 
@@ -76,6 +58,82 @@ class MyButton extends StatelessWidget {
   }
 }
 
+class AlertButton extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+        margin: EdgeInsets.all(20),
+        child: RaisedButton(
+          child: Text('PUSH'),
+          onPressed: () => _onBasicAlertPressed(context),
+        ));
+  }
+
+  _onBasicAlertPressed(context) {
+    Alert(
+      context: context,
+      title: "My name is Barbara",
+      desc: "I am awesome",
+    ).show();
+  }
+}
+
+class LiveTime extends StatefulWidget {
+  @override
+  _LiveTimeState createState() => _LiveTimeState();
+}
+
+class _LiveTimeState extends State<LiveTime> {
+  String _timeString;
+
+  @override
+  void initState() {
+    _timeString = _formatDateTime(DateTime.now());
+    Timer.periodic(Duration(seconds: 1), (Timer t) => _getTime());
+    super.initState();
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      child: Text(_timeString, style: MyTextStyle,),
+    );
+  }
+
+  void _getTime() {
+    final DateTime now = DateTime.now();
+    final String formattedDateTime = _formatDateTime(now);
+    setState(() {
+      _timeString = formattedDateTime;
+    });
+  }
+
+  String _formatDateTime(DateTime dateTime) {
+    return DateFormat('dd.MM.yyyy hh:mm:ss').format(dateTime);
+  }
+}
+
+/*
+class MyText extends StatelessWidget {
+  final Color _bgColor;
+  final String _myMessage;
+  MyText(this._bgColor, this._myMessage);
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+        margin: EdgeInsets.all(20),
+        color: _bgColor,
+        child: Center(
+          child: Text(
+            _myMessage,
+            textAlign: TextAlign.center,
+            style: TextStyle(fontSize: 20.0, fontWeight: FontWeight.bold),
+          ),
+        ));
+  }
+}
+
 class MyTime extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
@@ -93,30 +151,4 @@ class MyTime extends StatelessWidget {
     );
   }
 }
-
-class AlertButton extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-/*     DateTime ts = new DateTime.now();
-    flipTime() {
-      Timer.periodic(
-          Duration(seconds: 1), (Timer t) => {ts = new DateTime.now()});
-      debugPrint(ts.toString());
-      } */
-    return Container(
-        margin: EdgeInsets.all(20),
-        child: RaisedButton(
-              child: Text('PUSH'),
-              onPressed: () => _onBasicAlertPressed(context),
-            ));
-  }
-
-  _onBasicAlertPressed(context) {
-    Alert(
-      context: context,
-      title: "My name is Barbara",
-      desc: "I am awesome",
-    ).show();
-  }
-
-}
+*/
