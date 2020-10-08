@@ -15,19 +15,16 @@ class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      drawer: NavDrawer(),
+        drawer: NavDrawer(),
         appBar: AppBar(
             title: Center(
           child: Text('HomePage', style: MyAppBarStyle),
         )),
-        body: Center(child: Column(
+        body: Center(
+            child: Column(
           // crossAxisAlignment: CrossAxisAlignment.center,
           // mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            MyButton('Go to Page 2'),
-            AlertButton(),
-           LiveTime()
-          ],
+          children: [MyButton('Go to Page 2'), AlertButton(), LiveTime()],
         )));
   }
 }
@@ -39,33 +36,33 @@ class NavDrawer extends StatelessWidget {
       child: ListView(
         children: <Widget>[
           DrawerHeader(
-            decoration: BoxDecoration(
-              color: Colors.blue
-            ),
-            child: Text('Menu', 
-            style: TextStyle(fontSize: 30, fontWeight: FontWeight.bold, color: Colors.white))),
-            ListTile(
-              leading: Icon(Icons.add_alert),
-            title: Text('Alert'), 
-            onTap: () => print('Alert button tapped!'),),
-            ListTile(
+              decoration: BoxDecoration(color: Colors.blue),
+              child: Text('Menu',
+                  style: TextStyle(
+                      fontSize: 30,
+                      fontWeight: FontWeight.bold,
+                      color: Colors.white))),
+          ListTile(
+            leading: Icon(Icons.add_alert),
+            title: Text('Alert'),
+            onTap: () => print('Alert button tapped!'),
+          ),
+          ListTile(
             leading: Icon(Icons.info),
-            title: Text('Help'), 
+            title: Text('Help'),
+            onTap: () => {print('Help button tapped!')},
+          ),
+          ListTile(
+            leading: Icon(Icons.directions_walk),
+            title: Text('Go to page 2'),
             onTap: () => {
-              print('Help button tapped!')
-              },), 
-              ListTile(
-                leading: Icon(Icons.directions_walk),
-                title: Text('Go to page 2'),
-                onTap: () => {
-                  Navigator.of(context)
-                    .push(MaterialPageRoute(builder: (context) => SecondPage())),
-                  print('Navigated to page 2')  
-                },
-              )           
+              Navigator.of(context)
+                  .push(MaterialPageRoute(builder: (context) => SecondPage())),
+              print('Navigated to page 2')
+            },
+          )
         ],
       ),
-      
     );
   }
 }
@@ -83,9 +80,9 @@ class MyButton extends StatelessWidget {
           borderRadius: BorderRadius.circular(5.0), color: Colors.blue),
       child: FlatButton(
           onPressed: () => {
-                Navigator.of(context)
-                    .push(MaterialPageRoute(builder: (context) => SecondPage())), 
-                print('Navigated to page 2') 
+                Navigator.of(context).push(
+                    MaterialPageRoute(builder: (context) => SecondPage())),
+                print('Navigated to page 2')
               },
           child: Text(
             _buttonName,
@@ -136,7 +133,10 @@ class _LiveTimeState extends State<LiveTime> {
   @override
   Widget build(BuildContext context) {
     return Container(
-      child: Text(_timeString, style: MyTextStyle,),
+      child: Text(
+        _timeString,
+        style: MyTextStyle,
+      ),
     );
   }
 
@@ -171,24 +171,6 @@ class MyText extends StatelessWidget {
             style: TextStyle(fontSize: 20.0, fontWeight: FontWeight.bold),
           ),
         ));
-  }
-}
-
-class MyTime extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    DateTime dt = new DateTime.now();
-    String dateFormatted = "${dt.day}.${dt.month}.${dt.year}";
-    // String timeFormatted = "${dt.hour}:${dt.minute}:${dt.second}";
-    // String displayDateTime = dateFormatted + 'T' + timeFormatted;
-    return Container(
-      margin: EdgeInsets.all(20),
-      child: Text(
-        'Date: ' + dateFormatted,
-        style: MyTimeStyle,
-        textAlign: TextAlign.center,
-      ),
-    );
   }
 }
 */

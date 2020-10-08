@@ -5,7 +5,8 @@ import '../services/tools.dart';
 // import 'package:http/http.dart' as http;
 // import 'dart:async';
 // import 'dart:convert';
-// import 'package:hive/hive.dart';
+
+const String dbPath = '../db/';
 
 class SecondPage extends StatefulWidget {
   @override
@@ -49,47 +50,4 @@ class _SecondPageState extends State<SecondPage> {
           ],
         ));
   }
-}
-
-class MyPubIp extends StatelessWidget {
-  final String _ipString;
-  MyPubIp(this._ipString);
-
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      child: Text(
-        _ipString,
-        style: MyTextStyle,
-      ),
-    );
-  }
-}
-
-class MyButton2 extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      margin: EdgeInsets.all(20),
-      // color: Colors.blue,
-      decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(5.0), color: Colors.blue),
-      child: FlatButton(
-          onPressed: saveToHive(),
-          child: Text(
-            'SAVE TO HIVE',
-            style: TextStyle(
-                fontSize: 15.0,
-                fontWeight: FontWeight.bold,
-                color: Colors.white),
-          )),
-    );
-  }
-
- /*  _saveToHive() async {
-    var db = await Hive.openBox('myDB');
-    await db.put('office', 'Bruchsal');
-    var currentOffice = await db.get('office');
-    debugPrint(currentOffice);
-  } */
 }
