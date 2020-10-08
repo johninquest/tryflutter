@@ -1,4 +1,4 @@
-// import 'package:flutter/material.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:http/http.dart' as http;
 // import 'dart.io';
 import 'dart:async';
@@ -24,5 +24,17 @@ class PublicIpObject {
   PublicIpObject({this.ip});
   factory PublicIpObject.fromJson(Map<String, dynamic> json) {
     return PublicIpObject(ip: json['ip']);
+  }
+}
+
+getMyPubIp() async {
+  const String url = 'https://api.ipify.org?format=json';
+  var response = await http.get(url);
+  if (response.body != null) {
+    debugPrint('${response.body}');
+    return '${response.body}';
+  } else {
+    debugPrint('Got no response');
+    return 'No response returned';
   }
 }
