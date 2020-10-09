@@ -2,8 +2,8 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'styles.dart';
-import '../pages/page2.dart';
-import '../pages/autotimingpage.dart';
+import 'page2.dart';
+import 'auto_timing_page.dart';
 // import 'dart:async';
 import 'package:rflutter_alert/rflutter_alert.dart';
 
@@ -44,9 +44,10 @@ class NavDrawer extends StatelessWidget {
               decoration: BoxDecoration(color: Colors.blue),
               child: Text('Menu',
                   style: TextStyle(
-                      fontSize: 30,
+                      fontSize: 25,
                       fontWeight: FontWeight.bold,
-                      color: Colors.white))),
+                      color: Colors.white))
+            ),
           ListTile(
             leading: Icon(Icons.east),
             title: Text('Go to page 2'),

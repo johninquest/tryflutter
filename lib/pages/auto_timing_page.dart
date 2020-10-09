@@ -6,15 +6,29 @@ class AutoTimingPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(title: Text('Auto Timing'),),
-      body: Column(children: [
+      body: Column(
+        children: [
         Row(
               mainAxisAlignment: MainAxisAlignment.center, //Center Row contents horizontally,
-              // crossAxisAlignment: CrossAxisAlignment.center, //Center Row contents vertically,
               children: [
-                MyActionButton('ARRIVED'),
-                MyActionButton('DEPARTED') 
+                MyActionButton('B1'),
+                MyActionButton('B2') 
               ],
             ),
+        Row(
+              mainAxisAlignment: MainAxisAlignment.center, //Center Row contents horizontally,
+              children: [
+                MyActionButton('B3'),
+                MyActionButton('B4') 
+              ],
+            ), 
+        Row(
+              mainAxisAlignment: MainAxisAlignment.center, //Center Row contents horizontally,
+              children: [
+                MyActionButton('B5'),
+                MyActionButton('B6') 
+              ],
+            ),       
       ],
 
       ),
@@ -30,14 +44,16 @@ class MyActionButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      margin: EdgeInsets.all(10),
+      margin: EdgeInsets.only(top: 60, bottom: 20, left: 30, right: 30),
       // color: Colors.blue,
       decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(5.0), color: Colors.blue),
       child: FlatButton(
         color: Colors.blue,
         child: Text(_buttonName, style: MyDefaultButtonStyle,),
-        onPressed: () => {},
+        onPressed: () => {
+          print('Timer button pressed!')
+          },
       ),
     );
   }
