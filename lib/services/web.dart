@@ -3,6 +3,7 @@ import 'package:http/http.dart' as http;
 // import 'dart.io';
 import 'dart:async';
 import 'dart:convert';
+import 'package:url_launcher/url_launcher.dart';
 
 // dynamic publicIpAddress;
 // const String reqUrl = 'https://api.ipify.org?format=json';
@@ -36,5 +37,14 @@ getMyPubIp() async {
   } else {
     debugPrint('Got no response');
     return 'No response returned';
+  }
+}
+
+myUrlLauncher() async {
+  const String url = 'https://flutter.dev';
+  if (await canLaunch(url)) {
+    await launch(url);
+  } else {
+    throw 'Could not launch $url';
   }
 }

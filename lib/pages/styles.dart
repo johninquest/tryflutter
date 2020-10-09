@@ -16,3 +16,5 @@ const MyTextStyle = TextStyle(
   fontSize: DefaultFontSize,
   fontWeight: FontWeight.bold,
 );
+
+const MyDefaultButtonStyle = TextStyle(fontSize: 15.0, fontWeight: FontWeight.bold, color: Colors.white);
