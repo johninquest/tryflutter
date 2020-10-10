@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 
+const double DefaultPageTitleFontSize = 25.0;
 const double DefaultFontSize = 20.0;
 const double HeaderFontSize = 25.0;
 const double BodyFontSize = 20.0;
@@ -12,9 +13,15 @@ const MyTimeStyle = TextStyle(
   fontWeight: FontWeight.bold,
 );
 
+const MyPageTitleStyle = TextStyle(
+  fontSize: DefaultPageTitleFontSize,
+  fontWeight: FontWeight.bold,
+);
+
 const MyTextStyle = TextStyle(
   fontSize: DefaultFontSize,
   fontWeight: FontWeight.bold,
 );
 
-const MyDefaultButtonStyle = TextStyle(fontSize: 15.0, fontWeight: FontWeight.bold, color: Colors.white);
+const MyDefaultButtonStyle =
+    TextStyle(fontSize: 15.0, fontWeight: FontWeight.bold, color: Colors.white);

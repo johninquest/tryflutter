@@ -25,3 +25,11 @@ saveToHive() async {
   print(currentOffice);
   return currentOffice;
 }
+
+class MyHiveDB {
+  getDataFromBox() {}
+
+  saveDataToBox() {}
+
+  deleteDataInBox() {}
+}

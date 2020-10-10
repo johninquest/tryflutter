@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
 import 'styles.dart';
 import '../services/tools.dart';
+import 'package:url_launcher/url_launcher.dart';
 //import '../services/web.dart';
 // import 'package:http/http.dart' as http;
 // import 'dart:async';
 // import 'dart:convert';
 // import 'dart:async';
 // import 'dart:convert';
-import 'package:url_launcher/url_launcher.dart';
 
 const String dbPath = '../db/';
 
@@ -49,28 +49,22 @@ class _SecondPageState extends State<SecondPage> {
               margin: EdgeInsets.all(20.0),
               child: Icon(Icons.favorite, color: Colors.red, size: 30.0),
             ),
-            UrlButton('Go to URL', 'https://heise.de'),
+            UrlButton('Go to URL', 'https://belego.de'),
             Row(
-              mainAxisAlignment: MainAxisAlignment.center, //Center Row contents horizontally,
+              mainAxisAlignment:
+                  MainAxisAlignment.center, //Center Row contents horizontally,
               // crossAxisAlignment: CrossAxisAlignment.center, //Center Row contents vertically,
-              children: [
-                MyActionButton('B1'),
-                MyActionButton('B2') 
-              ],
+              children: [MyActionButton('B1'), MyActionButton('B2')],
             ),
             Row(
-              mainAxisAlignment: MainAxisAlignment.center, //Center Row contents horizontally,
-              children: [
-                MyActionButton('B3'),
-                MyActionButton('B4') 
-              ],
+              mainAxisAlignment:
+                  MainAxisAlignment.center, //Center Row contents horizontally,
+              children: [MyActionButton('B3'), MyActionButton('B4')],
             ),
             Row(
-              mainAxisAlignment: MainAxisAlignment.center, //Center Row contents horizontally,
-              children: [
-                MyActionButton('B5'),
-                MyActionButton('B6') 
-              ],
+              mainAxisAlignment:
+                  MainAxisAlignment.center, //Center Row contents horizontally,
+              children: [MyActionButton('B5'), MyActionButton('B6')],
             )
 
             // Container
@@ -93,21 +87,23 @@ class UrlButton extends StatelessWidget {
           borderRadius: BorderRadius.circular(5.0), color: Colors.blue),
       child: FlatButton(
         color: Colors.blue,
-        child: Text(_buttonName, style: MyDefaultButtonStyle,),
+        child: Text(
+          _buttonName,
+          style: MyDefaultButtonStyle,
+        ),
         onPressed: () => _myUrlLauncher(_targetUrl),
       ),
     );
   }
 
   _myUrlLauncher(String url) async {
-  // final String url = 'https://heise.de';
-  if (await canLaunch(url)) {
-        await launch(url);
-    }else {
-    throw 'Could not launch $url';
+    // final String url = 'https://heise.de';
+    if (await canLaunch(url)) {
+      await launch(url);
+    } else {
+      throw 'Could not launch $url';
     }
   }
-
 }
 
 class MyActionButton extends StatelessWidget {
@@ -123,7 +119,10 @@ class MyActionButton extends StatelessWidget {
           borderRadius: BorderRadius.circular(5.0), color: Colors.blue),
       child: FlatButton(
         color: Colors.blue,
-        child: Text(_buttonName, style: MyDefaultButtonStyle,),
+        child: Text(
+          _buttonName,
+          style: MyDefaultButtonStyle,
+        ),
         onPressed: () => {},
       ),
     );
