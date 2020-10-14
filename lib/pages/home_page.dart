@@ -7,17 +7,12 @@ import 'auto_timing_page.dart';
 // import 'dart:async';
 import 'package:rflutter_alert/rflutter_alert.dart';
 
-class HomePage extends StatefulWidget {
-  @override
-  _HomePageState createState() => _HomePageState();
-}
-
-class _HomePageState extends State<HomePage> {
+class HomePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        drawer: NavDrawer(),
-        appBar: AppBar(
+      drawer: NavDrawer(),
+      appBar: AppBar(
             title: Center(
           child: Text('HomePage', style: MyAppBarStyle),
         )),

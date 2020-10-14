@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 import 'styles.dart';
 
 class AutoTimingPage extends StatelessWidget {
@@ -44,6 +45,9 @@ class MyActionButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final DateTime ts = new DateTime.now();
+    final DateFormat formatter = DateFormat('yyyy-MM-dd HH:mm:ss');
+    final String tsFormatted = formatter.format(ts);
     return Container(
       margin: EdgeInsets.only(top: 60, bottom: 20, left: 30, right: 30),
       // color: Colors.blue,
@@ -55,7 +59,7 @@ class MyActionButton extends StatelessWidget {
           _buttonName,
           style: MyDefaultButtonStyle,
         ),
-        onPressed: () => {print('Timer button pressed!')},
+        onPressed: () => {print('Timer button pressed!, Time => $tsFormatted')},
       ),
     );
   }
