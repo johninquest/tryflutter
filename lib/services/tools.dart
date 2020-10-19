@@ -3,8 +3,7 @@
 // import 'package:intl/intl.dart';
 import 'package:hive/hive.dart';
 import 'package:hive_flutter/hive_flutter.dart';
-
-const String dbPath = '../db/';
+import 'package:path_provider/path_provider.dart' as path_provider;
 
 liveClock() {
   var dt = new DateTime.now();
@@ -17,19 +16,18 @@ liveClock() {
   return 'Date: $dayNow.$monthNow.$yearNow \nTime: $hourNow:$minuteNow:$secondNow';
 }
 
-saveToHive() async {
-  await Hive.initFlutter(dbPath);
-  var db = await Hive.openBox('myDB');
-  await db.put('office', 'Bruchsal');
-  var currentOffice = await db.get('office');
-  print(currentOffice);
-  return currentOffice;
-}
-
+// Specs for interaction with HiveDB
 class MyHiveDB {
+  void initializeDatabasePath() async {
+    final appDocDir = await path_provider.getApplicationDocumentsDirectory();
+    Hive.init(appDocDir.path);
+  }
+
+  void initializeHiveBox() async {
+    await Hive.openBox('timedata');
+  }
+
   getDataFromBox() {}
-
   saveDataToBox() {}
-
   deleteDataInBox() {}
 }
