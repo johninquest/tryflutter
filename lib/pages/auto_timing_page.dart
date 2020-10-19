@@ -7,9 +7,9 @@ class AutoTimingPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-          title: Center(
-        child: Text('Auto Timing'),
-      )),
+        centerTitle: true,
+        title: Text('Auto Timing'),
+      ),
       body: Column(
         children: [
           Container(

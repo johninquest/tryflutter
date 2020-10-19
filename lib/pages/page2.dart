@@ -23,6 +23,7 @@ class _SecondPageState extends State<SecondPage> {
     //  String timeString = "${dt.hour}:${dt.minute}:${dt.second}";
     return Scaffold(
         appBar: AppBar(
+          centerTitle: true,
           title: Text(
             'Page 2',
             style: MyAppBarStyle,
@@ -49,7 +50,7 @@ class _SecondPageState extends State<SecondPage> {
               margin: EdgeInsets.all(20.0),
               child: Icon(Icons.favorite, color: Colors.red, size: 30.0),
             ),
-            UrlButton('Go to URL', 'https://belego.de'),
+            UrlButton('Go to Website', 'https://heise.de'),
             Row(
               mainAxisAlignment:
                   MainAxisAlignment.center, //Center Row contents horizontally,

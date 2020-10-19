@@ -13,9 +13,9 @@ class HomePage extends StatelessWidget {
     return Scaffold(
       drawer: NavDrawer(),
       appBar: AppBar(
-            title: Center(
-          child: Text('HomePage', style: MyAppBarStyle),
-        )),
+        centerTitle: true,
+            title: Text('HomePage', style: MyAppBarStyle),
+        ),
         body: Center(
             child: Column(
           /* crossAxisAlignment: CrossAxisAlignment.center,
@@ -69,7 +69,7 @@ class NavDrawer extends StatelessWidget {
           ListTile(
             leading: Icon(Icons.info),
             title: Text('Info'),
-            onTap: () => {print('Tapped the info button!')},
+            onTap: () => {print('Tapped info button!')},
           ),
         ],
       ),
