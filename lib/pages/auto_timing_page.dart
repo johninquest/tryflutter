@@ -1,10 +1,19 @@
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'styles.dart';
+import 'package:hive/hive.dart';
+import 'package:path_provider/path_provider.dart' as path_provider;
+
+void initiateMyHiveDB() async {
+  final appDocDir = await path_provider.getApplicationDocumentsDirectory();
+  Hive.init(appDocDir.path);
+  await Hive.openBox('myBox');
+}
 
 class AutoTimingPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
+    initiateMyHiveDB();
     return Scaffold(
       appBar: AppBar(
         centerTitle: true,
@@ -68,7 +77,14 @@ class MyActionButton extends StatelessWidget {
           _buttonName,
           style: MyDefaultButtonStyle,
         ),
-        onPressed: () => {print('$_actionName => ${actionTimestamp(new DateTime.now())}')},
+        onPressed: () => {
+          print('$_actionName => ${actionTimestamp(new DateTime.now())}'),
+          Hive.box('myBox')
+              .put(_actionName, actionTimestamp(new DateTime.now())),
+          print(
+              'Data in my hive store is => ${Hive.box('myBox').get(_actionName)}'),
+          Hive.box('myBox').close()
+        },
       ),
     );
   }
