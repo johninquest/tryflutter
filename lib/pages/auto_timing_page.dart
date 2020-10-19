@@ -7,8 +7,9 @@ class AutoTimingPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Auto Timing'),
-      ),
+          title: Center(
+        child: Text('Auto Timing'),
+      )),
       body: Column(
         children: [
           Container(
@@ -21,17 +22,26 @@ class AutoTimingPage extends StatelessWidget {
           Row(
             mainAxisAlignment:
                 MainAxisAlignment.center, //Center Row contents horizontally,
-            children: [MyActionButton('B1'), MyActionButton('B2')],
+            children: [
+              MyActionButton('B1', 'arrivedWorkAt'),
+              MyActionButton('B2', 'leftWorkAt')
+            ],
           ),
           Row(
             mainAxisAlignment:
                 MainAxisAlignment.center, //Center Row contents horizontally,
-            children: [MyActionButton('B3'), MyActionButton('B4')],
+            children: [
+              MyActionButton('B3', 'startedWorkAt'),
+              MyActionButton('B4', 'endedWorkAt')
+            ],
           ),
           Row(
             mainAxisAlignment:
                 MainAxisAlignment.center, //Center Row contents horizontally,
-            children: [MyActionButton('B5'), MyActionButton('B6')],
+            children: [
+              MyActionButton('B5', 'startedBreakAt'),
+              MyActionButton('B6', 'endedBreakAt')
+            ],
           ),
         ],
       ),
@@ -41,13 +51,12 @@ class AutoTimingPage extends StatelessWidget {
 
 class MyActionButton extends StatelessWidget {
   final String _buttonName;
-  MyActionButton(this._buttonName);
+  final String _actionName;
+  // final String _actionTimestamp;
+  MyActionButton(this._buttonName, this._actionName);
 
   @override
   Widget build(BuildContext context) {
-    final DateTime ts = new DateTime.now();
-    final DateFormat formatter = DateFormat('yyyy-MM-dd HH:mm:ss');
-    final String tsFormatted = formatter.format(ts);
     return Container(
       margin: EdgeInsets.only(top: 60, bottom: 20, left: 30, right: 30),
       // color: Colors.blue,
@@ -59,8 +68,14 @@ class MyActionButton extends StatelessWidget {
           _buttonName,
           style: MyDefaultButtonStyle,
         ),
-        onPressed: () => {print('Timer button pressed!, Time => $tsFormatted')},
+        onPressed: () => {print('$_actionName => ${actionTimestamp(new DateTime.now())}')},
       ),
     );
+  }
+
+  actionTimestamp(DateTime ts) {
+    DateFormat formatter = DateFormat('yyyy-MM-dd HH:mm:ss');
+    String tsFormatted = formatter.format(ts);
+    return tsFormatted;
   }
 }
