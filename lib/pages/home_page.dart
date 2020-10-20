@@ -11,21 +11,18 @@ class HomePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      drawer: NavDrawer(),
-      appBar: AppBar(
-        centerTitle: true,
-            title: Text('HomePage', style: MyAppBarStyle),
+        drawer: NavDrawer(),
+        appBar: AppBar(
+          centerTitle: true,
+          title: Text('HomePage', style: MyAppBarStyle),
         ),
         body: Center(
             child: Column(
           /* crossAxisAlignment: CrossAxisAlignment.center,
           mainAxisAlignment: MainAxisAlignment.center, */
-          children: [
-            MyButton('Go to Page 2'), 
-            AlertButton(), 
-            LiveTime()
-            ],
-        )));
+          children: [MyButton('Go to Page 2'), AlertButton('PUSH', 'Welcome to Bruchsal!'), LiveTime()],
+        )),
+        bottomNavigationBar: MyBottomMenu());
   }
 }
 
@@ -41,8 +38,7 @@ class NavDrawer extends StatelessWidget {
                   style: TextStyle(
                       fontSize: 25,
                       fontWeight: FontWeight.bold,
-                      color: Colors.white))
-            ),
+                      color: Colors.white))),
           ListTile(
             leading: Icon(Icons.east),
             title: Text('Go to page 2'),
@@ -57,9 +53,9 @@ class NavDrawer extends StatelessWidget {
             title: Text('Automatic timing'),
             onTap: () => {
               print('Tapped automatic timing button!'),
-              Navigator.of(context)
-                  .push(MaterialPageRoute(builder: (context) => AutoTimingPage()))
-              },
+              Navigator.of(context).push(
+                  MaterialPageRoute(builder: (context) => AutoTimingPage()))
+            },
           ),
           ListTile(
             leading: Icon(Icons.edit),
@@ -106,12 +102,16 @@ class MyButton extends StatelessWidget {
 }
 
 class AlertButton extends StatelessWidget {
+  final String _buttonName;
+  final String _alertMessage;
+  AlertButton(this._buttonName, this._alertMessage);
+
   @override
   Widget build(BuildContext context) {
     return Container(
         margin: EdgeInsets.all(20),
         child: RaisedButton(
-          child: Text('PUSH'),
+          child: Text(_buttonName),
           onPressed: () => _onBasicAlertPressed(context),
         ));
   }
@@ -119,8 +119,8 @@ class AlertButton extends StatelessWidget {
   _onBasicAlertPressed(context) {
     Alert(
       context: context,
-      title: "My name is Barbara",
-      desc: "I am awesome",
+      title: _alertMessage,
+      // desc: "I am awesome",
     ).show();
   }
 }
@@ -160,6 +160,49 @@ class _LiveTimeState extends State<LiveTime> {
 
   String _formatDateTime(DateTime dateTime) {
     return DateFormat('dd.MM.yyyy hh:mm:ss').format(dateTime);
+  }
+}
+
+class MyBottomMenu extends StatefulWidget {
+  @override
+  _MyBottomMenuState createState() => _MyBottomMenuState();
+}
+
+class _MyBottomMenuState extends State<MyBottomMenu> {
+  @override
+  Widget build(BuildContext context) {
+    return BottomNavigationBar(
+      currentIndex: 0,
+      type: BottomNavigationBarType.fixed,
+      backgroundColor: Colors.blue,
+      iconSize: 30,
+      // selectedLabelStyle: TextStyle(color: Colors.white),
+      items: [
+        BottomNavigationBarItem(
+          icon: Icon(
+            Icons.timer,
+            color: Colors.white,
+          ),
+          label: '',
+        ),
+        BottomNavigationBarItem(
+          icon: Icon(Icons.edit, color: Colors.white),
+          label: '',
+        ),
+        BottomNavigationBarItem(
+            icon: Icon(Icons.list, color: Colors.white), label: '')
+      ],
+      onTap: (index) => {print(index), afterTap(index)},
+    );
+  }
+
+  void afterTap(int myIndex) {
+    if (myIndex == 0) {
+      Navigator.of(context)
+          .push(MaterialPageRoute(builder: (context) => SecondPage()));
+    } else {
+      print('Nothing to do!');
+    }
   }
 }
 

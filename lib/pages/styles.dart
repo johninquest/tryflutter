@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 
-const double DefaultPageTitleFontSize = 25.0;
+const double DefaultPageTitleFontSize = 20.0;
 const double DefaultFontSize = 20.0;
-const double HeaderFontSize = 25.0;
+const double HeaderFontSize = 20.0;
 const double BodyFontSize = 20.0;
 
 const MyAppBarStyle = TextStyle(
