@@ -7,7 +7,7 @@ import 'package:path_provider/path_provider.dart' as path_provider;
 void initiateMyHiveDB() async {
   final appDocDir = await path_provider.getApplicationDocumentsDirectory();
   Hive.init(appDocDir.path);
-  await Hive.openBox('myBox');
+  // await Hive.openBox('myBox');
 }
 
 class AutoTimingPage extends StatelessWidget {
@@ -32,8 +32,8 @@ class AutoTimingPage extends StatelessWidget {
             mainAxisAlignment:
                 MainAxisAlignment.center, //Center Row contents horizontally,
             children: [
-              MyActionButton('B1', 'arrivedWorkAt'),
-              MyActionButton('B2', 'leftWorkAt')
+              MyActionButton('KOMMEN', 'arrivedWorkAt'),
+              MyActionButton('GEHEN', 'leftWorkAt')
             ],
           ),
           Row(
@@ -52,6 +52,12 @@ class AutoTimingPage extends StatelessWidget {
               MyActionButton('B6', 'endedBreakAt')
             ],
           ),
+          Container(
+            child: Text(
+              'Hello world!',
+              style: MyTextStyle,
+            ),
+          )
         ],
       ),
     );
@@ -77,14 +83,7 @@ class MyActionButton extends StatelessWidget {
           _buttonName,
           style: MyDefaultButtonStyle,
         ),
-        onPressed: () => {
-          print('$_actionName => ${actionTimestamp(new DateTime.now())}'),
-          Hive.box('myBox')
-              .put(_actionName, actionTimestamp(new DateTime.now())),
-          print(
-              'Data in my hive store is => ${Hive.box('myBox').get(_actionName)}'),
-          Hive.box('myBox').close()
-        },
+        onPressed: () => {MyHiveOperations().getDataInHive(_actionName)},
       ),
     );
   }
@@ -93,5 +92,21 @@ class MyActionButton extends StatelessWidget {
     DateFormat formatter = DateFormat('yyyy-MM-dd HH:mm:ss');
     String tsFormatted = formatter.format(ts);
     return tsFormatted;
+  }
+}
+
+class MyHiveOperations {
+  String datainHive;
+  saveToHive(String actName, String actTime) async {
+    await Hive.openBox('myBox');
+    await Hive.box('myBox').put(actName, actTime);
+  }
+
+  getDataInHive(String actName) async {
+    await Hive.openBox('myBox');
+    var savedData = await Hive.box('myBox').get(actName);
+    this.datainHive = savedData;
+    print(savedData);
+    return savedData;
   }
 }

@@ -1,9 +1,23 @@
-// import 'package:flutter/material.dart';
-// import 'dart:async';
-// import 'package:intl/intl.dart';
+import 'package:flutter/material.dart';
 import 'package:hive/hive.dart';
-import 'package:hive_flutter/hive_flutter.dart';
 import 'package:path_provider/path_provider.dart' as path_provider;
+
+// Specs for interaction with HiveDB
+class MyHiveDB {
+  void initializeDatabasePath() async {
+    WidgetsFlutterBinding.ensureInitialized();
+    final appDocDir = await path_provider.getApplicationDocumentsDirectory();
+    Hive.init(appDocDir.path);
+  }
+
+  void initializeHiveBox() async {
+    await Hive.openBox('appdata');
+  }
+
+  getDataFromBox() {}
+  saveDataToBox() {}
+  deleteDataInBox() {}
+}
 
 liveClock() {
   var dt = new DateTime.now();
@@ -14,20 +28,4 @@ liveClock() {
   var minuteNow = dt.minute;
   var secondNow = dt.second;
   return 'Date: $dayNow.$monthNow.$yearNow \nTime: $hourNow:$minuteNow:$secondNow';
-}
-
-// Specs for interaction with HiveDB
-class MyHiveDB {
-  void initializeDatabasePath() async {
-    final appDocDir = await path_provider.getApplicationDocumentsDirectory();
-    Hive.init(appDocDir.path);
-  }
-
-  void initializeHiveBox() async {
-    await Hive.openBox('timedata');
-  }
-
-  getDataFromBox() {}
-  saveDataToBox() {}
-  deleteDataInBox() {}
 }
