@@ -4,8 +4,8 @@ import 'package:intl/intl.dart';
 import 'styles.dart';
 import 'page2.dart';
 import 'auto_timing_page.dart';
-// import 'dart:async';
 import 'package:rflutter_alert/rflutter_alert.dart';
+import '../services/web.dart';
 
 class HomePage extends StatelessWidget {
   @override
@@ -20,7 +20,7 @@ class HomePage extends StatelessWidget {
             child: Column(
           /* crossAxisAlignment: CrossAxisAlignment.center,
           mainAxisAlignment: MainAxisAlignment.center, */
-          children: [MyButton('Go to Page 2'), AlertButton('PUSH', 'Welcome to Bruchsal!'), LiveTime()],
+          children: [MyButton('Go to Page 2'), AlertButton('PUSH', 'Welcome to Bruchsal!'), LiveTime(), MyPublicIPAddress()],
         )),
         bottomNavigationBar: MyBottomMenu());
   }
@@ -205,6 +205,7 @@ class _MyBottomMenuState extends State<MyBottomMenu> {
     }
   }
 }
+
 
 /*
 class MyText extends StatelessWidget {
