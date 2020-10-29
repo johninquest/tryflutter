@@ -23,9 +23,9 @@ class MyPublicIPAddress extends StatelessWidget {
           future: fetchUrl(),
           builder: (context, snapshot) {
             if (snapshot.hasData) {
-             print(snapshot.data.body);
+             // print(snapshot.data.body);
               Map resData = jsonDecode(snapshot.data.body);
-             print(resData['ip']);
+             // print(resData['ip']);
               return Container(
                 margin: EdgeInsets.all(40.0),
                 child: Text('My Public IP: ${resData['ip']}',

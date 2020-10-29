@@ -3,9 +3,8 @@ import 'styles.dart';
 import 'package:intl/intl.dart';
 import 'dart:async';
 import 'page2.dart';
-import '../pages/auto_timing_page.dart';
-import '../pages/manual_timing_page.dart';
-import '../pages/timing_data_page.dart';
+import '../pages/home_side_menu.dart';
+import '../pages/home_bottom_menu.dart';
 import 'package:rflutter_alert/rflutter_alert.dart';
 import '../services/web.dart';
 
@@ -22,56 +21,9 @@ class HomePage extends StatelessWidget {
             child: Column(
           /* crossAxisAlignment: CrossAxisAlignment.center,
           mainAxisAlignment: MainAxisAlignment.center, */
-          children: [MyButton('Go to Page 2'), AlertButton('PUSH', 'Welcome to Bruchsal!'), LiveTime(), MyPublicIPAddress()],
+          children: [MyButton('Go to Page 2'), AlertButton('PUSH', 'Welcome to Flutter!'), LiveTime(), MyPublicIPAddress()],
         )),
         bottomNavigationBar: MyBottomMenu());
-  }
-}
-
-class NavDrawer extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    return Drawer(
-      child: ListView(
-        children: <Widget>[
-          DrawerHeader(
-              decoration: BoxDecoration(color: Colors.blue),
-              child: Text('Menu',
-                  style: TextStyle(
-                      fontSize: 25,
-                      fontWeight: FontWeight.bold,
-                      color: Colors.white))),
-          ListTile(
-            leading: Icon(Icons.east),
-            title: Text('Go to page 2'),
-            onTap: () => {
-              Navigator.of(context)
-                  .push(MaterialPageRoute(builder: (context) => SecondPage())),
-              print('Navigated to page 2')
-            },
-          ),
-          ListTile(
-            leading: Icon(Icons.timer),
-            title: Text('Automatic timing'),
-            onTap: () => {
-              print('Tapped automatic timing button!'),
-              Navigator.of(context).push(
-                  MaterialPageRoute(builder: (context) => AutoTimingPage()))
-            },
-          ),
-          ListTile(
-            leading: Icon(Icons.edit),
-            title: Text('Manual timing'),
-            onTap: () => {print('Tapped manual timing button!')},
-          ),
-          ListTile(
-            leading: Icon(Icons.info),
-            title: Text('Info'),
-            onTap: () => {print('Tapped info button!')},
-          ),
-        ],
-      ),
-    );
   }
 }
 
@@ -164,75 +116,3 @@ class _LiveTimeState extends State<LiveTime> {
     return DateFormat('dd.MM.yyyy hh:mm:ss').format(dateTime);
   }
 }
-
-class MyBottomMenu extends StatefulWidget {
-  @override
-  _MyBottomMenuState createState() => _MyBottomMenuState();
-}
-
-class _MyBottomMenuState extends State<MyBottomMenu> {
-  @override
-  Widget build(BuildContext context) {
-    return BottomNavigationBar(
-      currentIndex: 0,
-      type: BottomNavigationBarType.fixed,
-      backgroundColor: Colors.blue,
-      iconSize: 30,
-      // selectedLabelStyle: TextStyle(color: Colors.white),
-      items: [
-        BottomNavigationBarItem(
-          icon: Icon(
-            Icons.timer,
-            color: Colors.white,
-          ),
-          label: '',
-        ),
-        BottomNavigationBarItem(
-          icon: Icon(Icons.edit, color: Colors.white),
-          label: '',
-        ),
-        BottomNavigationBarItem(
-            icon: Icon(Icons.list, color: Colors.white), label: '')
-      ],
-      onTap: (index) => {print(index), afterTap(index)},
-    );
-  }
-
-  void afterTap(int myIndex) {
-    if (myIndex == 0) {
-      Navigator.of(context)
-          .push(MaterialPageRoute(builder: (context) => AutoTimingPage()));
-    } else if (myIndex == 1) {
-      Navigator.of(context)
-          .push(MaterialPageRoute(builder: (context) => ManualTimingPage()));
-    } else if(myIndex == 2) {
-      Navigator.of(context)
-          .push(MaterialPageRoute(builder: (context) => TimingDataPage()));
-    }else {
-      print('!!! No where to go !!!');
-    }
-  }
-}
-
-
-/*
-class MyText extends StatelessWidget {
-  final Color _bgColor;
-  final String _myMessage;
-  MyText(this._bgColor, this._myMessage);
-
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-        margin: EdgeInsets.all(20),
-        color: _bgColor,
-        child: Center(
-          child: Text(
-            _myMessage,
-            textAlign: TextAlign.center,
-            style: TextStyle(fontSize: 20.0, fontWeight: FontWeight.bold),
-          ),
-        ));
-  }
-}
-*/

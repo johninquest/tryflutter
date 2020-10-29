@@ -51,23 +51,6 @@ class _SecondPageState extends State<SecondPage> {
               child: Icon(Icons.favorite, color: Colors.red, size: 30.0),
             ),
             UrlButton('Go to Website', 'https://heise.de'),
-            Row(
-              mainAxisAlignment:
-                  MainAxisAlignment.center, //Center Row contents horizontally,
-              // crossAxisAlignment: CrossAxisAlignment.center, //Center Row contents vertically,
-              children: [MyActionButton('B1'), MyActionButton('B2')],
-            ),
-            Row(
-              mainAxisAlignment:
-                  MainAxisAlignment.center, //Center Row contents horizontally,
-              children: [MyActionButton('B3'), MyActionButton('B4')],
-            ),
-            Row(
-              mainAxisAlignment:
-                  MainAxisAlignment.center, //Center Row contents horizontally,
-              children: [MyActionButton('B5'), MyActionButton('B6')],
-            )
-
             // Container
           ],
         ));
@@ -107,25 +90,25 @@ class UrlButton extends StatelessWidget {
   }
 }
 
-class MyActionButton extends StatelessWidget {
-  final String _buttonName;
-  MyActionButton(this._buttonName);
+
+/*
+class MyText extends StatelessWidget {
+  final Color _bgColor;
+  final String _myMessage;
+  MyText(this._bgColor, this._myMessage);
 
   @override
   Widget build(BuildContext context) {
     return Container(
-      margin: EdgeInsets.all(10),
-      // color: Colors.blue,
-      decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(5.0), color: Colors.blue),
-      child: FlatButton(
-        color: Colors.blue,
-        child: Text(
-          _buttonName,
-          style: MyDefaultButtonStyle,
-        ),
-        onPressed: () => {},
-      ),
-    );
+        margin: EdgeInsets.all(20),
+        color: _bgColor,
+        child: Center(
+          child: Text(
+            _myMessage,
+            textAlign: TextAlign.center,
+            style: TextStyle(fontSize: 20.0, fontWeight: FontWeight.bold),
+          ),
+        ));
   }
 }
+*/

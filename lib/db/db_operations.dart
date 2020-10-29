@@ -10,12 +10,12 @@ class HiveDbOperations {
   }
 
   String datainHive;
-  saveToHive(String actName, String actTime) async {
+  saveDataToHive(String actName, String actTime) async {
     await Hive.openBox('myBox');
     await Hive.box('myBox').put(actName, actTime);
   }
 
-  getDataInHive(String actName) async {
+  getDataFromHive(String actName) async {
     await Hive.openBox('myBox');
     var savedData = await Hive.box('myBox').get(actName);
     this.datainHive = savedData;

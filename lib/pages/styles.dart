@@ -21,6 +21,7 @@ const MyPageTitleStyle = TextStyle(
 const MyTextStyle = TextStyle(
   fontSize: DefaultFontSize,
   fontWeight: FontWeight.bold,
+  // color: Colors.blue
 );
 
 const MyDefaultButtonStyle =

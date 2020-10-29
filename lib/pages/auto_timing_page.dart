@@ -71,8 +71,8 @@ class MyActionButton extends StatelessWidget {
           style: MyDefaultButtonStyle,
         ),
         onPressed: () => {
-          HiveDbOperations().saveToHive(_actionName, actionTimestamp(new DateTime.now())),
-          HiveDbOperations().getDataInHive(_actionName)},
+          HiveDbOperations().saveDataToHive(_actionName, actionTimestamp(new DateTime.now())),
+          HiveDbOperations().getDataFromHive(_actionName)},
       ),
     );
   }
