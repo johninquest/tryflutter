@@ -1,9 +1,11 @@
-import 'dart:async';
 import 'package:flutter/material.dart';
-import 'package:intl/intl.dart';
 import 'styles.dart';
+import 'package:intl/intl.dart';
+import 'dart:async';
 import 'page2.dart';
-import 'auto_timing_page.dart';
+import '../pages/auto_timing_page.dart';
+import '../pages/manual_timing_page.dart';
+import '../pages/timing_data_page.dart';
 import 'package:rflutter_alert/rflutter_alert.dart';
 import '../services/web.dart';
 
@@ -199,9 +201,15 @@ class _MyBottomMenuState extends State<MyBottomMenu> {
   void afterTap(int myIndex) {
     if (myIndex == 0) {
       Navigator.of(context)
-          .push(MaterialPageRoute(builder: (context) => SecondPage()));
-    } else {
-      print('Nothing to do!');
+          .push(MaterialPageRoute(builder: (context) => AutoTimingPage()));
+    } else if (myIndex == 1) {
+      Navigator.of(context)
+          .push(MaterialPageRoute(builder: (context) => ManualTimingPage()));
+    } else if(myIndex == 2) {
+      Navigator.of(context)
+          .push(MaterialPageRoute(builder: (context) => TimingDataPage()));
+    }else {
+      print('!!! No where to go !!!');
     }
   }
 }
