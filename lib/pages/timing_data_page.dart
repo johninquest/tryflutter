@@ -15,7 +15,7 @@ class TimingDataPage extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
           Center(
-            child: Text(
+              child: Text(
             'Timing Data Page',
             style: MyTextStyle,
           )),
@@ -32,11 +32,13 @@ class ShowHiveData extends StatelessWidget {
   Widget build(BuildContext context) {
     return FutureBuilder(
       future: HiveDbOperations().getDataFromHive('startedWorkAt'),
-      // ignore: missing_return
       builder: (context, snapshot) {
         if (snapshot.hasData) {
           print(snapshot.data);
-          return Text(snapshot.data, style: TextStyle(fontSize: 20, color: Colors.blue),);
+          return Text(
+            snapshot.data,
+            style: TextStyle(fontSize: 20, color: Colors.blue),
+          );
         } else {
           return CircularProgressIndicator();
         }
