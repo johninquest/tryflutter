@@ -1,11 +1,3 @@
-// import 'package:flutter/material.dart';
-
-class MyRouter {
-  void navigateToPage(String pageName) {
-    print(pageName);
-    // return pageName;
-  }
-}
 
 liveClock() {
   var dt = new DateTime.now();

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'styles.dart';
-import '../db/db_operations.dart';
+import '../db/hive.dart';
 
 class AutoTimingPage extends StatelessWidget {
   @override

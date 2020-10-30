@@ -7,6 +7,7 @@ import '../pages/home_side_menu.dart';
 import '../pages/home_bottom_menu.dart';
 import 'package:rflutter_alert/rflutter_alert.dart';
 import '../services/web.dart';
+import '../services/router.dart';
 
 class HomePage extends StatelessWidget {
   @override
@@ -40,9 +41,9 @@ class MyButton extends StatelessWidget {
           borderRadius: BorderRadius.circular(5.0), color: Colors.blue),
       child: FlatButton(
           onPressed: () => {
-                Navigator.of(context).push(
-                    MaterialPageRoute(builder: (context) => SecondPage())),
-                print('Navigated to page 2')
+            PageRouter().navigateToPage(SecondPage(), context),
+            /*  Navigator.of(context).push(
+                    MaterialPageRoute(builder: (context) => SecondPage())), */
               },
           child: Text(
             _buttonName,

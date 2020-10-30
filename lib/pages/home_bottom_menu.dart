@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import '../pages/auto_timing_page.dart';
 import '../pages/manual_timing_page.dart';
 import '../pages/timing_data_page.dart';
-
+import '../services/router.dart';
 
 class MyBottomMenu extends StatefulWidget {
   @override
@@ -40,15 +40,12 @@ class _MyBottomMenuState extends State<MyBottomMenu> {
 
   void afterTap(int myIndex) {
     if (myIndex == 0) {
-      Navigator.of(context)
-          .push(MaterialPageRoute(builder: (context) => AutoTimingPage()));
+      PageRouter().navigateToPage(AutoTimingPage(), context);
     } else if (myIndex == 1) {
-      Navigator.of(context)
-          .push(MaterialPageRoute(builder: (context) => ManualTimingPage()));
-    } else if(myIndex == 2) {
-      Navigator.of(context)
-          .push(MaterialPageRoute(builder: (context) => TimingDataPage()));
-    }else {
+      PageRouter().navigateToPage(ManualTimingPage(), context);
+    } else if (myIndex == 2) {
+      PageRouter().navigateToPage(TimingDataPage(), context);
+    } else {
       print('!!! No where to go !!!');
     }
   }

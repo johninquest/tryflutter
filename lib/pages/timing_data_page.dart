@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'styles.dart';
-import '../db/db_operations.dart';
+import '../db/hive.dart';
 
 class TimingDataPage extends StatelessWidget {
   @override
