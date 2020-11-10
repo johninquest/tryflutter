@@ -22,7 +22,12 @@ class HomePage extends StatelessWidget {
             child: Column(
           /* crossAxisAlignment: CrossAxisAlignment.center,
           mainAxisAlignment: MainAxisAlignment.center, */
-          children: [MyButton('Go to Page 2'), AlertButton('PUSH', 'Welcome to Flutter!'), LiveTime(), MyPublicIPAddress()],
+          children: [
+            MyButton('Go to Page 2'),
+            AlertButton('PUSH', ''' Don't touch me! '''),
+            LiveTime(),
+            MyPublicIPAddress()
+          ],
         )),
         bottomNavigationBar: MyBottomMenu());
   }
@@ -41,8 +46,8 @@ class MyButton extends StatelessWidget {
           borderRadius: BorderRadius.circular(5.0), color: Colors.blue),
       child: FlatButton(
           onPressed: () => {
-            PageRouter().navigateToPage(SecondPage(), context),
-            /*  Navigator.of(context).push(
+                PageRouter().navigateToPage(SecondPage(), context),
+                /*  Navigator.of(context).push(
                     MaterialPageRoute(builder: (context) => SecondPage())), */
               },
           child: Text(

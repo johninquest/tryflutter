@@ -50,7 +50,7 @@ class _SecondPageState extends State<SecondPage> {
               margin: EdgeInsets.all(20.0),
               child: Icon(Icons.favorite, color: Colors.red, size: 30.0),
             ),
-            UrlButton('Go to Website', 'https://heise.de'),
+            UrlButton('Go to Website', 'https://www.ax-ao.de'),
             // Container
           ],
         ));
@@ -89,7 +89,6 @@ class UrlButton extends StatelessWidget {
     }
   }
 }
-
 
 /*
 class MyText extends StatelessWidget {

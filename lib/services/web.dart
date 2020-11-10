@@ -7,7 +7,7 @@ import 'dart:convert';
 import 'package:url_launcher/url_launcher.dart';
 
 myUrlLauncher() async {
-  const String url = 'https://flutter.dev';
+  const String url = 'https://www.ax-ao.de';
   if (await canLaunch(url)) {
     await launch(url);
   } else {
@@ -23,16 +23,16 @@ class MyPublicIPAddress extends StatelessWidget {
           future: fetchUrl(),
           builder: (context, snapshot) {
             if (snapshot.hasData) {
-             // print(snapshot.data.body);
+              // print(snapshot.data.body);
               Map resData = jsonDecode(snapshot.data.body);
-             // print(resData['ip']);
+              // print(resData['ip']);
               return Container(
-                margin: EdgeInsets.all(40.0),
-                child: Text('My Public IP: ${resData['ip']}',
-                  style: TextStyle(
-                      color: Colors.blue,
-                      fontSize: 20,
-                      fontWeight: FontWeight.bold)));
+                  margin: EdgeInsets.all(40.0),
+                  child: Text('My Public IP: ${resData['ip']}',
+                      style: TextStyle(
+                          color: Colors.blue,
+                          fontSize: 20,
+                          fontWeight: FontWeight.bold)));
             } else {
               return CircularProgressIndicator();
             }

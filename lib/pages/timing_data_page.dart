@@ -31,7 +31,7 @@ class ShowHiveData extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return FutureBuilder(
-      future: HiveDbOperations().getDataFromHive('startedWorkAt'),
+      future: HiveDbOperations().getDataFromHive('arrivedWorkAt'),
       builder: (context, snapshot) {
         if (snapshot.hasData) {
           print(snapshot.data);

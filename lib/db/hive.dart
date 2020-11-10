@@ -2,11 +2,10 @@ import 'package:hive/hive.dart';
 import 'package:path_provider/path_provider.dart' as path_provider;
 
 class HiveDbOperations {
-
   void initializeHiveDB() async {
     final appDocDir = await path_provider.getApplicationDocumentsDirectory();
-     Hive.init(appDocDir.path);
-  // await Hive.openBox('myBox');
+    Hive.init(appDocDir.path);
+    // await Hive.openBox('myBox');
   }
 
   String datainHive;
@@ -19,7 +18,7 @@ class HiveDbOperations {
     await Hive.openBox('myBox');
     var savedData = await Hive.box('myBox').get(actName);
     this.datainHive = savedData;
-    // print(savedData);
+    print(savedData);
     return savedData;
   }
 

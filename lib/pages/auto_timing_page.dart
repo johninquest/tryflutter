@@ -2,8 +2,14 @@ import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'styles.dart';
 import '../db/hive.dart';
+import 'package:rflutter_alert/rflutter_alert.dart';
 
-class AutoTimingPage extends StatelessWidget {
+class AutoTimingPage extends StatefulWidget {
+  @override
+  _AutoTimingPageState createState() => _AutoTimingPageState();
+}
+
+class _AutoTimingPageState extends State<AutoTimingPage> {
   @override
   Widget build(BuildContext context) {
     HiveDbOperations().initializeHiveDB();
@@ -25,24 +31,24 @@ class AutoTimingPage extends StatelessWidget {
             mainAxisAlignment:
                 MainAxisAlignment.center, //Center Row contents horizontally,
             children: [
-              MyActionButton('ARRIVED', 'arrivedWorkAt'),
-              MyActionButton('DEPARTED', 'leftWorkAt')
+              MyActionButton('COME', 'arrivedWorkAt'),
+              MyActionButton('GO', 'leftWorkAt')
             ],
           ),
           Row(
             mainAxisAlignment:
                 MainAxisAlignment.center, //Center Row contents horizontally,
             children: [
-              MyActionButton('WORK \nSTARTED', 'startedWorkAt'),
-              MyActionButton('WORK \nENDED', 'endedWorkAt')
+              MyActionButton('BEGIN', 'startedWorkAt'),
+              MyActionButton('END', 'endedWorkAt')
             ],
           ),
           Row(
             mainAxisAlignment:
                 MainAxisAlignment.center, //Center Row contents horizontally,
             children: [
-              MyActionButton('BREAK \nSTARTED', 'startedBreakAt'),
-              MyActionButton('BREAK \nENDED', 'endedBreakAt')
+              MyActionButton('BS', 'startedBreakAt'),
+              MyActionButton('BE', 'endedBreakAt')
             ],
           ),
         ],
@@ -53,9 +59,9 @@ class AutoTimingPage extends StatelessWidget {
 
 class MyActionButton extends StatelessWidget {
   final String _buttonName;
-  final String _actionName;
-  // final String _actionTimestamp;
-  MyActionButton(this._buttonName, this._actionName);
+  final String _eventName;
+  // final String _eventDateTime;
+  MyActionButton(this._buttonName, this._eventName);
 
   @override
   Widget build(BuildContext context) {
@@ -65,21 +71,50 @@ class MyActionButton extends StatelessWidget {
       decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(5.0), color: Colors.blue),
       child: FlatButton(
-        color: Colors.blue,
-        child: Text(
-          _buttonName,
-          style: MyDefaultButtonStyle,
-        ),
-        onPressed: () => {
-          HiveDbOperations().saveDataToHive(_actionName, actionTimestamp(new DateTime.now())),
-          HiveDbOperations().getDataFromHive(_actionName)},
-      ),
+          color: Colors.blue,
+          child: Text(
+            _buttonName,
+            style: MyDefaultButtonStyle,
+          ),
+          onPressed: () => onAlertButtonsPressed(context)),
     );
   }
 
-  actionTimestamp(DateTime ts) {
+  eventDateTime(DateTime ts) {
     DateFormat formatter = DateFormat('yyyy-MM-dd HH:mm:ss');
     String tsFormatted = formatter.format(ts);
     return tsFormatted;
+  }
+
+  onAlertButtonsPressed(context) {
+    Alert(
+      context: context,
+      type: AlertType.info,
+      title: _buttonName,
+      desc: '$_eventName => ${eventDateTime(new DateTime.now())}',
+      buttons: [
+        DialogButton(
+          child: Text(
+            "CANCEL",
+            style: TextStyle(color: Colors.white, fontSize: 18),
+          ),
+          onPressed: () => Navigator.pop(context),
+          color: Colors.grey,
+        ),
+        DialogButton(
+          child: Text(
+            "SAVE",
+            style: TextStyle(color: Colors.white, fontSize: 18),
+          ),
+          onPressed: () => {
+            HiveDbOperations()
+                .saveDataToHive(_eventName, eventDateTime(new DateTime.now())),
+            Navigator.pop(context),
+            HiveDbOperations().getDataFromHive(_eventName),
+          },
+          color: Colors.blue,
+        )
+      ],
+    ).show();
   }
 }
