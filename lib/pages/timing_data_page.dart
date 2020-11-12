@@ -5,6 +5,7 @@ import '../db/hive.dart';
 class TimingDataPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
+    // HiveDbOperations().initializeHiveDB();
     return Scaffold(
       appBar: AppBar(
         centerTitle: true,
@@ -31,7 +32,7 @@ class ShowHiveData extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return FutureBuilder(
-      future: HiveDbOperations().getDataFromHive('arrivedWorkAt'),
+      future: HiveDbOperations().getDataFromHive('endedBreakAt'),
       builder: (context, snapshot) {
         if (snapshot.hasData) {
           print(snapshot.data);
@@ -45,4 +46,5 @@ class ShowHiveData extends StatelessWidget {
       },
     );
   }
+
 }
