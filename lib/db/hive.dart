@@ -1,4 +1,3 @@
-import 'package:flutter/material.dart';
 import 'package:hive/hive.dart';
 import 'package:path_provider/path_provider.dart' as path_provider;
 
@@ -22,7 +21,7 @@ class HiveDbOperations {
       await Hive.openBox('myBox');
       return await Hive.box('myBox').get(actName);
     } catch (e) {
-      print(e);
+      print('Error occured with message => $e');
       return 'Database access failed!';
     }
   }
