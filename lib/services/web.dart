@@ -45,3 +45,15 @@ class MyPublicIPAddress extends StatelessWidget {
     return await http.get(ipUrl);
   }
 }
+
+class HttpRequests {
+  httpGet(String reqUrl) async {
+    var getRequest = await http.get(reqUrl);
+    return getRequest;
+  }
+
+  httpPost(String reqUrl, Map reqHeaders, Map reqPayload) async {
+    var postRequest = await http.post(reqUrl, headers: reqHeaders, body: reqPayload);
+    return postRequest;
+  }
+}
