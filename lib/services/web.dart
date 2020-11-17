@@ -46,14 +46,20 @@ class MyPublicIPAddress extends StatelessWidget {
   }
 }
 
-class HttpRequests {
+class HttpRequestHandler {
   httpGet(String reqUrl) async {
     var getRequest = await http.get(reqUrl);
     return getRequest;
   }
 
   httpPost(String reqUrl, Map reqHeaders, Map reqPayload) async {
-    var postRequest = await http.post(reqUrl, headers: reqHeaders, body: reqPayload);
+    var postRequest =
+        await http.post(reqUrl, headers: reqHeaders, body: reqPayload);
     return postRequest;
+  }
+
+  parseHttpResponse(dynamic httpResponseData) {
+    var parsedData = jsonDecode(httpResponseData);
+    return parsedData;
   }
 }

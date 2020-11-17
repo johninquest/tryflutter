@@ -4,6 +4,7 @@ import '../pages/page2.dart';
 import '../pages/auto_timing_page.dart';
 import '../pages/manual_timing_page.dart';
 import '../pages/timing_data_page.dart';
+import '../pages/news_page.dart';
 import '../services/router.dart';
 
 class NavDrawer extends StatelessWidget {
@@ -41,6 +42,14 @@ class NavDrawer extends StatelessWidget {
                     PageRouter().navigateToPage(TimingDataPage(), context),
                     print('Navigated to timing data page'),
                   }),   
+          ListTile(
+            leading: Icon(Icons.library_books),
+            title: Text('News'),
+            onTap: () => {
+              PageRouter().navigateToPage(NewsPage(), context),
+              print('Navigated to the news page')
+            },
+          ),  
           ListTile(
             leading: Icon(Icons.east),
             title: Text('Go to page 2'),

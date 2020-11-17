@@ -1,16 +1,6 @@
-import 'dart:convert';
-
 import 'package:flutter/material.dart';
 import 'styles.dart';
-import '../services/tools.dart';
-import '../services/web.dart';
 import 'package:url_launcher/url_launcher.dart';
-//import '../services/web.dart';
-// import 'package:http/http.dart' as http;
-// import 'dart:async';
-// import 'dart:convert';
-// import 'dart:async';
-// import 'dart:convert';
 
 const String dbPath = '../db/';
 
@@ -33,9 +23,8 @@ class _SecondPageState extends State<SecondPage> {
           ),
         ),
         body: Column(
-          children: <Widget>[
-            Flexible(child: ShowNews())
-            /* Container(
+          children: [
+            Container(
               margin: EdgeInsets.all(20.0),
               child: Center(
                   child: Text(
@@ -43,20 +32,19 @@ class _SecondPageState extends State<SecondPage> {
                 style: MyTextStyle,
               )),
             ),
-            Container(
+            /* Container(
               margin: EdgeInsets.only(top: 10.0),
               child: Text(
                 liveClock(),
                 style: MyTextStyle,
               ),
-            ),
+            ), */
             Container(
               margin: EdgeInsets.all(20.0),
               child: Icon(Icons.favorite, color: Colors.red, size: 30.0),
             ),
             UrlButton('Go to Website', 'https://www.ax-ao.de'),
-            Text(''),
-            ShowNews()
+            Text('')
             // Container */
           ],
         ));
@@ -95,73 +83,3 @@ class UrlButton extends StatelessWidget {
     }
   }
 }
-
-class ShowNews extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    final String testUrl =
-        'https://newsapi.org/v2/top-headlines?apiKey=bc80aee5a6654843bd745e416bccc24d&country=de';
-    return FutureBuilder(
-      future: HttpRequests().httpGet(testUrl),
-      builder: (context, snapshot) {
-        if (snapshot.connectionState == ConnectionState.done) {
-          if (snapshot.hasData) {
-            print('Response contains data!');
-            var rawResponse = snapshot.data.body;
-            var responseDecoded = jsonDecode(rawResponse);
-            List newsData = responseDecoded['articles'];
-            // int newsLength = responseDecoded['totalResults'];
-            print(responseDecoded['totalResults']);
-            //print(newsData[0]['author']);
-            // return Text(newsLength.toString());
-            return ListView.builder(
-              itemCount: newsData.length,
-              itemBuilder: (context, index) {
-                var newsSource = newsData[index]['source']['name'];
-                var newTitle = newsData[index]['title'];
-                var newAuthor = newsData[index]['author'];
-                var newDetails = newsData[index]['description'];
-                return Text(
-                    '$newsSource \n$newTitle \n$newAuthor \n$newDetails');
-              },
-            );
-          }
-          if (snapshot.hasError) {
-            print('Error occured!');
-            return Text('Error occured!');
-          }
-        }
-        if (snapshot.connectionState == ConnectionState.waiting) {
-          print('Request still in progesss!');
-          return CircularProgressIndicator();
-        }
-        if (snapshot.connectionState == ConnectionState.none) {
-          print('No connection in progress!');
-          return Text('No connection in progress!');
-        }
-      },
-    );
-  }
-}
-
-/*
-class MyText extends StatelessWidget {
-  final Color _bgColor;
-  final String _myMessage;
-  MyText(this._bgColor, this._myMessage);
-
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-        margin: EdgeInsets.all(20),
-        color: _bgColor,
-        child: Center(
-          child: Text(
-            _myMessage,
-            textAlign: TextAlign.center,
-            style: TextStyle(fontSize: 20.0, fontWeight: FontWeight.bold),
-          ),
-        ));
-  }
-}
-*/

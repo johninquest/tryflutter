@@ -21,7 +21,8 @@ class _AutoTimingPageState extends State<AutoTimingPage> {
       body: Column(
         children: [
           Container(
-            margin: EdgeInsets.only(top: 50),
+            margin: EdgeInsets.fromLTRB(5.0, 50.0, 5.0, 10.0),
+            padding: EdgeInsets.all(10.0),
             child: Text(
               'Clock Your Time',
               style: MyPageTitleStyle,
@@ -31,24 +32,24 @@ class _AutoTimingPageState extends State<AutoTimingPage> {
             mainAxisAlignment:
                 MainAxisAlignment.center, //Center Row contents horizontally,
             children: [
-              MyActionButton('COME', 'arrivedWorkAt'),
-              MyActionButton('GO', 'leftWorkAt')
+              MyActionButton('ARRIVAL', 'arrivedWorkAt'),
+              MyActionButton('DEPARTURE', 'leftWorkAt')
             ],
           ),
           Row(
             mainAxisAlignment:
                 MainAxisAlignment.center, //Center Row contents horizontally,
             children: [
-              MyActionButton('BEGIN', 'startedWorkAt'),
-              MyActionButton('END', 'endedWorkAt')
+              MyActionButton('WORK STARTED', 'startedWorkAt'),
+              MyActionButton('WORK ENDED', 'endedWorkAt')
             ],
           ),
           Row(
             mainAxisAlignment:
                 MainAxisAlignment.center, //Center Row contents horizontally,
             children: [
-              MyActionButton('BS', 'startedBreakAt'),
-              MyActionButton('BE', 'endedBreakAt')
+              MyActionButton('BREAK STARTED', 'startedBreakAt'),
+              MyActionButton('BREAK ENDED', 'endedBreakAt')
             ],
           ),
         ],
@@ -66,12 +67,15 @@ class MyActionButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      margin: EdgeInsets.only(top: 60, bottom: 20, left: 30, right: 30),
+      margin: EdgeInsets.all(20.0),
       // color: Colors.blue,
       decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(5.0), color: Colors.blue),
+          borderRadius: BorderRadius.circular(10.0), color: Colors.blue),
       child: FlatButton(
           color: Colors.blue,
+          padding: EdgeInsets.all(20.0),
+          //hoverColor: Colors.grey[300],
+          shape: CircleBorder(),
           child: Text(
             _buttonName,
             style: MyDefaultButtonStyle,
@@ -89,7 +93,7 @@ class MyActionButton extends StatelessWidget {
   onAlertButtonsPressed(context) {
     Alert(
       context: context,
-      type: AlertType.info,
+      // type: AlertType.info,
       title: _buttonName,
       desc: '$_eventName => ${eventDateTime(new DateTime.now())}',
       buttons: [
