@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
-import 'styles.dart';
+// import 'styles.dart';
 import '../services/web.dart';
 import 'dart:convert';
+// import '../assets/';
 
 class NewsPage extends StatelessWidget {
   @override
@@ -27,9 +28,30 @@ class NewsPage extends StatelessWidget {
                     itemBuilder: (context, index) {
                       var newsSource = newsList[index]['source']['name'];
                       var newsTitle = newsList[index]['title'];
-                      var newsAuthor = newsList[index]['author'];
+                      // var newsAuthor = newsList[index]['author'];
+                      var newsImage = newsList[index]['urlToImage'];
                       return Card(
-                        child: Text(newsTitle),
+                        margin: EdgeInsets.all(10),
+                        elevation: 5.0,
+                        shape: CircleBorder(),
+                        child: Column(
+                          mainAxisAlignment: MainAxisAlignment.spaceAround,
+                          children: [
+                            Container(
+                              child: Text(newsTitle),
+                            ),
+                            Container(
+                              child: Text('\u00a9 ${newsSource.toUpperCase()}'),
+                            ),
+                            Container(
+                              child: Image.network(
+                                verifyImage(newsImage),
+                                fit: BoxFit.fill,
+                              ),
+                              // child: Image.network(newsImage),
+                            )
+                          ],
+                        ),
                       );
                     });
               } else {
@@ -38,5 +60,14 @@ class NewsPage extends StatelessWidget {
             },
           ),
         ));
+  }
+}
+
+verifyImage(String imgData) {
+  // print(imgData.runtimeType);
+  if (imgData == null) {
+    return 'No image available';
+  } else {
+    return imgData;
   }
 }

@@ -6,12 +6,11 @@ import 'package:http/http.dart' as http;
 import 'dart:convert';
 import 'package:url_launcher/url_launcher.dart';
 
-myUrlLauncher() async {
-  const String url = 'https://www.ax-ao.de';
-  if (await canLaunch(url)) {
-    await launch(url);
+urlLauncher(String targetUrl) async {
+  if (await canLaunch(targetUrl)) {
+    await launch(targetUrl);
   } else {
-    throw 'Could not launch $url';
+    print('Could not launch $targetUrl');
   }
 }
 

@@ -5,6 +5,7 @@ import 'dart:async';
 import 'page2.dart';
 import '../pages/home_side_menu.dart';
 import '../pages/home_bottom_menu.dart';
+import '../pages/news_page.dart';
 import 'package:rflutter_alert/rflutter_alert.dart';
 import '../services/web.dart';
 import '../services/router.dart';
@@ -23,7 +24,8 @@ class HomePage extends StatelessWidget {
           /* crossAxisAlignment: CrossAxisAlignment.center,
           mainAxisAlignment: MainAxisAlignment.center, */
           children: [
-            MyButton('Go to Page 2'),
+            MyButton('Go to Page 2', SecondPage()),
+            MyButton('Go to News Page', NewsPage()),
             AlertButton('PUSH', ''' Don't touch me! '''),
             LiveTime(),
             MyPublicIPAddress()
@@ -35,7 +37,8 @@ class HomePage extends StatelessWidget {
 
 class MyButton extends StatelessWidget {
   final String _buttonName;
-  MyButton(this._buttonName);
+  final Widget _targetWidget;
+  MyButton(this._buttonName, this._targetWidget);
 
   @override
   Widget build(BuildContext context) {
@@ -46,7 +49,7 @@ class MyButton extends StatelessWidget {
           borderRadius: BorderRadius.circular(5.0), color: Colors.blue),
       child: FlatButton(
           onPressed: () => {
-                PageRouter().navigateToPage(SecondPage(), context),
+                PageRouter().navigateToPage(_targetWidget, context),
                 /*  Navigator.of(context).push(
                     MaterialPageRoute(builder: (context) => SecondPage())), */
               },
