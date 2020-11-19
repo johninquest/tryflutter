@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
 import 'styles.dart';
 import 'package:intl/intl.dart';
@@ -128,27 +130,37 @@ class _LiveTimeState extends State<LiveTime> {
 class MyPublicIp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    final String myUrl = 'https://api.ipify.org?format=json1';
+    final String myUrl = 'https://api.ipify.org?format=json';
     return FutureBuilder(
         future: HttpRequestHandler().httpGet(myUrl),
         builder: (context, snapshot) {
           if (snapshot.hasData) {
             print('Has data!');
-            String responseData = snapshot.data.body;
+            var resData = snapshot.data.body;
+            Map resDecoded = jsonDecode(resData);
             return Container(
-              height: 100.0,
-              width: 200.0,
-              child: Card(
-                color: Colors.blue, 
-                margin: EdgeInsets.all(20.0), 
-                child: Column( 
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  crossAxisAlignment: CrossAxisAlignment.center, 
-                  children: [
-                  Text('My Public IP', style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold, fontSize: 15.0)),
-                  Text(responseData, style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold, fontSize: 20.0)),],
-              ),
-            ));
+                height: 100.0,
+                width: 200.0,
+                child: Card(
+                  color: Colors.blue,
+                  margin: EdgeInsets.all(20.0),
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    children: [
+                      Text('My Public IP',
+                          style: TextStyle(
+                              color: Colors.white,
+                              fontWeight: FontWeight.bold,
+                              fontSize: 15.0)),
+                      Text(resDecoded['ip'],
+                          style: TextStyle(
+                              color: Colors.white,
+                              fontWeight: FontWeight.bold,
+                              fontSize: 20.0)),
+                    ],
+                  ),
+                ));
           }
           if (snapshot.hasError) {
             print('Has error!');

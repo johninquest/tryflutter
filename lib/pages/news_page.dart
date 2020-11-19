@@ -44,22 +44,15 @@ class NewsPage extends StatelessWidget {
                               child: Text('\u00a9 ${newsSource.toUpperCase()}'),
                             ),
                             Container(
-                              child: Image.network(
-                                verifyImage(newsImage),
-                                fit: BoxFit.fill,
+                              child: verifyImage(newsImage)
                               ),
-                              // child: Image.network(newsImage),
-                            )
+                              // child: Image.network(newsImage, fit: BoxFit.fill),
                           ],
                         ),
                       );
                     });
               } else {
                 return CircularProgressIndicator();
-               /*  return Text('No news!');
-                return Container(
-                  child: Card(child: Image(image: AssetImage('assets/no-image.png'),),),
-                );          */
               }
             },
           ),
@@ -73,6 +66,6 @@ verifyImage(String imgData) {
     print('No image available');
     return Image(image: AssetImage('assets/no-image.png'));
   } else {
-    return imgData;
+    return Image.network(imgData, fit: BoxFit.fill,);
   }
 }

@@ -48,12 +48,17 @@ class MyPublicIpAddress extends StatelessWidget {
 class HttpRequestHandler {
   httpGet(String reqUrl) async {
     Response reqResponse = await get(reqUrl);
-    return reqResponse;
+    if (reqResponse.statusCode == 200) {
+      print(reqResponse.statusCode);
+      return reqResponse;
+    } else {
+      print(reqResponse.statusCode);
+      return 'Request failed!';
+    }
   }
 
   httpPost(String reqUrl, Map reqHeaders, Map reqPayload) async {
-    var postRequest =
-        await post(reqUrl, headers: reqHeaders, body: reqPayload);
+    var postRequest = await post(reqUrl, headers: reqHeaders, body: reqPayload);
     return postRequest;
   }
 
@@ -61,5 +66,4 @@ class HttpRequestHandler {
     var parsedData = jsonDecode(httpResponseData);
     return parsedData;
   }
-
 }
