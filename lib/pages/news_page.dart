@@ -56,6 +56,10 @@ class NewsPage extends StatelessWidget {
                     });
               } else {
                 return CircularProgressIndicator();
+               /*  return Text('No news!');
+                return Container(
+                  child: Card(child: Image(image: AssetImage('assets/no-image.png'),),),
+                );          */
               }
             },
           ),
@@ -66,7 +70,8 @@ class NewsPage extends StatelessWidget {
 verifyImage(String imgData) {
   // print(imgData.runtimeType);
   if (imgData == null) {
-    return 'No image available';
+    print('No image available');
+    return Image(image: AssetImage('assets/no-image.png'));
   } else {
     return imgData;
   }

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
-import 'package:http/http.dart' as http;
+import 'package:http/http.dart';
 // import 'dart.io';
 // import 'dart:async';
 import 'dart:convert';
@@ -14,7 +14,7 @@ urlLauncher(String targetUrl) async {
   }
 }
 
-class MyPublicIPAddress extends StatelessWidget {
+class MyPublicIpAddress extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -41,19 +41,19 @@ class MyPublicIPAddress extends StatelessWidget {
 
   fetchUrl() async {
     String ipUrl = 'https://api.ipify.org?format=json';
-    return await http.get(ipUrl);
+    return await get(ipUrl);
   }
 }
 
 class HttpRequestHandler {
   httpGet(String reqUrl) async {
-    var getRequest = await http.get(reqUrl);
-    return getRequest;
+    Response reqResponse = await get(reqUrl);
+    return reqResponse;
   }
 
   httpPost(String reqUrl, Map reqHeaders, Map reqPayload) async {
     var postRequest =
-        await http.post(reqUrl, headers: reqHeaders, body: reqPayload);
+        await post(reqUrl, headers: reqHeaders, body: reqPayload);
     return postRequest;
   }
 
@@ -61,4 +61,5 @@ class HttpRequestHandler {
     var parsedData = jsonDecode(httpResponseData);
     return parsedData;
   }
+
 }

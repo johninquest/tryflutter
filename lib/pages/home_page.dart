@@ -21,14 +21,13 @@ class HomePage extends StatelessWidget {
         ),
         body: Center(
             child: Column(
-          /* crossAxisAlignment: CrossAxisAlignment.center,
-          mainAxisAlignment: MainAxisAlignment.center, */
           children: [
             MyButton('Go to Page 2', SecondPage()),
             MyButton('Go to News Page', NewsPage()),
             AlertButton('PUSH', ''' Don't touch me! '''),
             LiveTime(),
-            MyPublicIPAddress()
+            Text(''),
+            MyPublicIp()
           ],
         )),
         bottomNavigationBar: MyBottomMenu());
@@ -123,5 +122,40 @@ class _LiveTimeState extends State<LiveTime> {
 
   String _formatDateTime(DateTime dateTime) {
     return DateFormat('dd.MM.yyyy hh:mm:ss').format(dateTime);
+  }
+}
+
+class MyPublicIp extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    final String myUrl = 'https://api.ipify.org?format=json1';
+    return FutureBuilder(
+        future: HttpRequestHandler().httpGet(myUrl),
+        builder: (context, snapshot) {
+          if (snapshot.hasData) {
+            print('Has data!');
+            String responseData = snapshot.data.body;
+            return Container(
+              height: 100.0,
+              width: 200.0,
+              child: Card(
+                color: Colors.blue, 
+                margin: EdgeInsets.all(20.0), 
+                child: Column( 
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  crossAxisAlignment: CrossAxisAlignment.center, 
+                  children: [
+                  Text('My Public IP', style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold, fontSize: 15.0)),
+                  Text(responseData, style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold, fontSize: 20.0)),],
+              ),
+            ));
+          }
+          if (snapshot.hasError) {
+            print('Has error!');
+            return Text('Response has error!');
+          } else {
+            return CircularProgressIndicator();
+          }
+        });
   }
 }
