@@ -8,7 +8,7 @@ class NewsPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final String reqUrl =
-        'https://newsapi.org/v2/top-headlines?apiKey=bc80aee5a6654843bd745e416bccc24d&country=us';
+        'https://newsapi.org/v2/top-headlines?apiKey=bc80aee5a6654843bd745e416bccc24d&country=de';
     return Scaffold(
         appBar: AppBar(
           centerTitle: true,

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'styles.dart';
-import 'package:url_launcher/url_launcher.dart';
+import '../services/web.dart';
 
 const String dbPath = '../db/';
 
@@ -32,18 +32,11 @@ class _SecondPageState extends State<SecondPage> {
                 style: MyTextStyle,
               )),
             ),
-            /* Container(
-              margin: EdgeInsets.only(top: 10.0),
-              child: Text(
-                liveClock(),
-                style: MyTextStyle,
-              ),
-            ), */
             Container(
               margin: EdgeInsets.all(20.0),
               child: Icon(Icons.favorite, color: Colors.red, size: 30.0),
             ),
-            UrlButton('Go to Website', 'https://www.ax-ao.de'),
+            StartUrlButton('Go to Website', 'https://heise.de'),
             Text('')
             // Container */
           ],
@@ -51,10 +44,10 @@ class _SecondPageState extends State<SecondPage> {
   }
 }
 
-class UrlButton extends StatelessWidget {
+class StartUrlButton extends StatelessWidget {
   final String _buttonName;
   final String _targetUrl;
-  UrlButton(this._buttonName, this._targetUrl);
+  StartUrlButton(this._buttonName, this._targetUrl);
 
   @override
   Widget build(BuildContext context) {
@@ -69,17 +62,8 @@ class UrlButton extends StatelessWidget {
           _buttonName,
           style: MyDefaultButtonStyle,
         ),
-        onPressed: () => _myUrlLauncher(_targetUrl),
+        onPressed: () => urlLauncher(_targetUrl),
       ),
     );
-  }
-
-  _myUrlLauncher(String url) async {
-    // final String url = 'https://heise.de';
-    if (await canLaunch(url)) {
-      await launch(url);
-    } else {
-      throw 'Could not launch $url';
-    }
   }
 }
