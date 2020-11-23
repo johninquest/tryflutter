@@ -135,7 +135,7 @@ class MyPublicIp extends StatelessWidget {
         future: HttpRequestHandler().httpGet(myUrl),
         builder: (context, snapshot) {
           if (snapshot.hasData) {
-            print('Has data!');
+            // print('Has data!');
             var resData = snapshot.data.body;
             Map resDecoded = jsonDecode(resData);
             return Container(
