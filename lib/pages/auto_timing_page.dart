@@ -4,12 +4,7 @@ import 'styles.dart';
 import '../db/hive.dart';
 import 'package:rflutter_alert/rflutter_alert.dart';
 
-class AutoTimingPage extends StatefulWidget {
-  @override
-  _AutoTimingPageState createState() => _AutoTimingPageState();
-}
-
-class _AutoTimingPageState extends State<AutoTimingPage> {
+class AutoTimingPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     HiveDbOperations().initializeHiveDB();
@@ -58,12 +53,16 @@ class _AutoTimingPageState extends State<AutoTimingPage> {
   }
 }
 
-class MyActionButton extends StatelessWidget {
+class MyActionButton extends StatefulWidget {
   final String _buttonName;
   final String _eventName;
-  // final String _eventDateTime;
   MyActionButton(this._buttonName, this._eventName);
 
+  @override
+  _MyActionButtonState createState() => _MyActionButtonState();
+}
+
+class _MyActionButtonState extends State<MyActionButton> {
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -77,25 +76,22 @@ class MyActionButton extends StatelessWidget {
           //hoverColor: Colors.grey[300],
           shape: CircleBorder(),
           child: Text(
-            _buttonName,
+            widget._buttonName,
             style: MyDefaultButtonStyle,
           ),
-          onPressed: () => onAlertButtonsPressed(context)),
+          onPressed: () => {
+                getCurrentDateTime(new DateTime.now()),
+                onAlertButtonsPressed(context)
+              }),
     );
-  }
-
-  eventDateTime(DateTime ts) {
-    DateFormat formatter = DateFormat('yyyy-MM-dd HH:mm:ss');
-    String tsFormatted = formatter.format(ts);
-    return tsFormatted;
   }
 
   onAlertButtonsPressed(context) {
     Alert(
       context: context,
       // type: AlertType.info,
-      title: _buttonName,
-      desc: '$_eventName => ${eventDateTime(new DateTime.now())}',
+      title: widget._buttonName,
+      desc: '${widget._eventName} => $_eventDateTime',
       buttons: [
         DialogButton(
           child: Text(
@@ -112,13 +108,22 @@ class MyActionButton extends StatelessWidget {
           ),
           onPressed: () => {
             HiveDbOperations()
-                .saveDataToHive(_eventName, eventDateTime(new DateTime.now())),
+                .saveDataToHive(widget._eventName, _eventDateTime),
             Navigator.pop(context),
-            HiveDbOperations().getDataFromHive(_eventName),
+            HiveDbOperations().getDataFromHive(widget._eventName),
           },
           color: Colors.blue,
         )
       ],
     ).show();
+  }
+
+  String _eventDateTime;
+
+  getCurrentDateTime(DateTime ts) {
+    DateFormat formatter = DateFormat('yyyy-MM-dd HH:mm:ss');
+    String tsFormatted = formatter.format(ts);
+    print('_eventDateTime => $tsFormatted');
+    return _eventDateTime = tsFormatted;
   }
 }

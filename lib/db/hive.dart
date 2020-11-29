@@ -15,8 +15,6 @@ class HiveDbOperations {
   }
 
   getDataFromHive(String actName) async {
-    // await Hive.openBox('myBox');
-    // var savedData = await Hive.box('myBox').get(actName);
     try {
       await Hive.openBox('myBox');
       return await Hive.box('myBox').get(actName);
