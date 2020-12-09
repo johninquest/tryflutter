@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 // import 'styles.dart';
 import '../pages/page2.dart';
 import '../pages/auto_timing_page.dart';
-import '../pages/manual_timing_page.dart';
 import '../pages/timing_data_page.dart';
 import '../pages/news_page.dart';
 import '../pages/form_page.dart';
@@ -30,15 +29,8 @@ class NavDrawer extends StatelessWidget {
             },
           ),
           ListTile(
-              leading: Icon(Icons.edit),
-              title: Text('Go to manual timing page'),
-              onTap: () => {
-                    PageRouter().navigateToPage(ManualTimingPage(), context),
-                    print('Navigated to manual timing page'),
-                  }),
-          ListTile(
               leading: Icon(Icons.list),
-              title: Text('Go to timing data'),
+              title: Text('Go to timing data page'),
               onTap: () => {
                     PageRouter().navigateToPage(TimingDataPage(), context),
                     print('Navigated to timing data page'),

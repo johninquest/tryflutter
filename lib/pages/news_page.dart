@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 // import 'styles.dart';
 import '../services/web.dart';
 import 'dart:convert';
-// import '../assets/';
 
 class NewsPage extends StatelessWidget {
   @override
@@ -19,7 +18,7 @@ class NewsPage extends StatelessWidget {
             future: HttpRequestHandler().httpGet(reqUrl),
             builder: (context, snapshot) {
               if (snapshot.hasData) {
-                print('This endpoint has data!');
+                // print('This endpoint has data!');
                 var rawData = snapshot.data.body;
                 var parsedData = jsonDecode(rawData);
                 List newsList = parsedData['articles'];
@@ -45,7 +44,7 @@ class NewsPage extends StatelessWidget {
                                   child: Text(
                                     newsTitle,
                                     style:
-                                        TextStyle(fontWeight: FontWeight.bold),
+                                        TextStyle(fontWeight: FontWeight.bold, color: Colors.blue),
                                   ),
                                 )),
                             // Container(margin: EdgeInsets.only(top: 10.0, bottom: 10.10),),
@@ -72,7 +71,7 @@ class NewsPage extends StatelessWidget {
 verifyImage(String imgData) {
   // print(imgData.runtimeType);
   if (imgData == null) {
-    print('No image available');
+    // print('No image available');
     return Image(image: AssetImage('assets/no-image.png'));
   } else {
     return Image.network(

@@ -14,13 +14,14 @@ class FormPage extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.center,
         mainAxisAlignment: MainAxisAlignment.center, 
         children: [
-          Text('Insert your data', style: MyTextStyle,),
+          Text('Insert data', style: MyTextStyle,),
         TextField(
           decoration: InputDecoration(hintText: 'Name'),
         ),
         TextField(
           decoration: InputDecoration(hintText: 'Age'),
         ),
+        Text(''),
         Row(
           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
           children: [
