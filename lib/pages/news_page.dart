@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 // import 'styles.dart';
 import '../services/web.dart';
 import 'dart:convert';
+// import 'package:webfeed/webfeed.dart';
+// import 'package:xml/xml.dart';
 
 class NewsPage extends StatelessWidget {
   @override
@@ -43,8 +45,9 @@ class NewsPage extends StatelessWidget {
                                   onTap: () => urlLauncher(newsUrl),
                                   child: Text(
                                     newsTitle,
-                                    style:
-                                        TextStyle(fontWeight: FontWeight.bold, color: Colors.blue),
+                                    style: TextStyle(
+                                        fontWeight: FontWeight.bold,
+                                        color: Colors.blue),
                                   ),
                                 )),
                             // Container(margin: EdgeInsets.only(top: 10.0, bottom: 10.10),),
@@ -69,9 +72,7 @@ class NewsPage extends StatelessWidget {
 }
 
 verifyImage(String imgData) {
-  // print(imgData.runtimeType);
   if (imgData == null) {
-    // print('No image available');
     return Image(image: AssetImage('assets/no-image.png'));
   } else {
     return Image.network(
