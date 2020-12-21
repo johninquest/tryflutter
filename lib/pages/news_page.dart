@@ -34,8 +34,8 @@ class NewsPage extends StatelessWidget {
                       var newsImage = newsList[index]['urlToImage'];
                       return Card(
                         margin: EdgeInsets.all(10),
-                        elevation: 5.0,
-                        shape: CircleBorder(),
+                        elevation: 0.0,
+                        // shape: CircleBorder(),
                         child: Column(
                           mainAxisAlignment: MainAxisAlignment.spaceAround,
                           children: [
