@@ -24,5 +24,10 @@ const MyTextStyle = TextStyle(
   // color: Colors.blue
 );
 
+const MyApiDataStyle = TextStyle(
+  fontWeight: FontWeight.bold,
+  // color: Colors.blue
+); 
+
 const MyDefaultButtonStyle =
     TextStyle(fontSize: 15.0, fontWeight: FontWeight.bold, color: Colors.white);

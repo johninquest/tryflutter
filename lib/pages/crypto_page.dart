@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import './styles.dart';
 import '../services/web.dart';
 import 'dart:convert';
 
@@ -25,22 +26,32 @@ class CryptoPage extends StatelessWidget {
                     itemBuilder: (context, index) {
                       String assetRank = assetList[index]['rank'];
                       String assetSymbol = assetList[index]['symbol'];
+                      String assetName = assetList[index]['name'];
                       String assetPrice = assetList[index]['priceUsd'];
                       return Card(
-                        margin: EdgeInsets.all(10.0),
+                        margin: EdgeInsets.all(2.0),
                         child: Row(
                           // crossAxisAlignment: CrossAxisAlignment.baseline,
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
                             Container(
-                              alignment: Alignment.bottomLeft,
-                              child: Text(assetRank, style: TextStyle(fontWeight: FontWeight.bold),)),
+                                alignment: Alignment.bottomLeft,
+                                child: Text(assetRank, style: MyApiDataStyle)),
                             Container(
-                              alignment: Alignment.bottomCenter,
-                              child: Text(assetSymbol, style: TextStyle(fontWeight: FontWeight.bold))),
+                                alignment: Alignment.bottomCenter,
+                                child: Column(
+                                  children: [
+                                    Text(
+                                      assetName,
+                                      style: MyApiDataStyle,
+                                    ),
+                                    Text(assetSymbol)
+                                  ],
+                                )),
                             Container(
-                              alignment: Alignment.bottomRight,
-                              child: Text(formatPrice(assetPrice), style: TextStyle(fontWeight: FontWeight.bold))),
+                                alignment: Alignment.bottomRight,
+                                child: Text(formatPrice(assetPrice),
+                                    style: MyApiDataStyle)),
                           ],
                         ),
                       );
@@ -56,6 +67,6 @@ class CryptoPage extends StatelessWidget {
 
 formatPrice(String amount) {
   double toDouble = double.parse(amount);
-  String amountToTwoDecimals = toDouble.toStringAsFixed(2) + ' USD';
-  return amountToTwoDecimals;
+  String amountToTwoDecimals = toDouble.toStringAsFixed(2);
+  return '\$$amountToTwoDecimals';
 }
