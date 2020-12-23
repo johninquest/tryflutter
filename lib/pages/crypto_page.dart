@@ -33,7 +33,7 @@ class CryptoPage extends StatelessWidget {
               future: HttpRequestHandler().httpGet(reqUrl),
               builder: (context, snapshot) {
                 if (snapshot.hasData) {
-                  print('Response has data');
+                  // print('Response has data');
                   String rawResponse = snapshot.data.body;
                   Map parsedResponse = jsonDecode(rawResponse);
                   List assetList = parsedResponse['data'];
@@ -57,19 +57,29 @@ class CryptoPage extends StatelessWidget {
                             children: [
                               Container(
                                   // alignment: Alignment.bottomCenter,
-                                  child: Column(
+                                  child: Row(
                                 children: [
-                                  Text(
-                                    assetRank, 
-                                    style: MyApiDataStyle,),
-                                  Text(
-                                    assetName,
-                                    style: MyApiDataStyle,
+                                  Column(
+                                    children: [
+                                      Text(
+                                        assetRank,
+                                        style: MyApiDataStyle,
+                                      ),
+                                      Text('')
+                                    ],
                                   ),
-                                  Text(
-                                    assetSymbol,
-                                    style: TextStyle(color: Colors.white),
-                                  )
+                                  Column(
+                                    children: [
+                                      Text(
+                                        assetSymbol,
+                                        style: MyApiDataStyle,
+                                      ),
+                                      Text(
+                                        assetName,
+                                        style: TextStyle(color: Colors.white),
+                                      )
+                                    ],
+                                  ),
                                 ],
                               )),
                               Container(
@@ -79,7 +89,8 @@ class CryptoPage extends StatelessWidget {
                               Container(
                                   // alignment: Alignment.bottomRight,
                                   child: Text(formatValueChange(asset24hChange),
-                                      style: MyApiDataStyle)),
+                                      style:
+                                          stylePercentChange(asset24hChange))),
                             ],
                           ),
                         );
@@ -104,4 +115,16 @@ formatValueChange(String changeValue) {
   double toDouble = double.parse(changeValue);
   String amountToTwoDecimals = toDouble.toStringAsFixed(2) + '%';
   return amountToTwoDecimals;
+}
+
+stylePercentChange(String percentValue) {
+  double toDouble = double.parse(percentValue);
+  if (toDouble < 0) {
+    var negStyle = TextStyle(fontWeight: FontWeight.bold, color: Colors.red);
+    return negStyle;
+  }
+  if (toDouble >= 0) {
+    var posStyle = TextStyle(fontWeight: FontWeight.bold, color: Colors.green);
+    return posStyle;
+  }
 }
