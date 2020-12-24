@@ -24,7 +24,7 @@ class CryptoPage extends StatelessWidget {
                   Text('Name', style: CDTextStyle),
                   Text('Price', style: CDTextStyle),
                   Text(
-                    '24h',
+                    '24h\u0394',
                     style: CDTextStyle,
                   )
                 ],

@@ -16,17 +16,16 @@ class MyHiveDataModel {
   MyHiveDataModel(this.actionId, this.actionTimestamp, this.isDeleted);
 }
 
-
 class EventModel {
-  final int eventId;
+  final int id;
   final String eventName;
   final String eventTime;
 
-  EventModel({this.eventId, this.eventName, this.eventTime});
+  EventModel({this.id, this.eventName, this.eventTime});
 
   Map<String, dynamic> toMap() {
     return {
-      'eventId': eventId,
+      'eventId': id,
       'eventNaame': eventName,
       'eventTime': eventTime,
     };

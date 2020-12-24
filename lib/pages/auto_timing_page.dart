@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
+import 'package:rflutter_alert/rflutter_alert.dart';
 import 'styles.dart';
 import '../db/hive.dart';
-import 'package:rflutter_alert/rflutter_alert.dart';
+import '../db/sqlite.dart';
+// import '../db/data_models.dart';
 
 class AutoTimingPage extends StatelessWidget {
   @override
@@ -109,8 +111,10 @@ class _MyActionButtonState extends State<MyActionButton> {
           onPressed: () => {
             HiveDbOperations()
                 .saveDataToHive(widget._eventName, _eventDateTime),
+            SqliteDbHelper().addEvent(widget._eventName, _eventDateTime),
             Navigator.pop(context),
             HiveDbOperations().getDataFromHive(widget._eventName),
+            SqliteDbHelper().getAllEvents()
           },
           color: Colors.blue,
         )

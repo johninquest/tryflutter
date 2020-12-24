@@ -23,67 +23,88 @@ class SqliteDbHelper {
 
   // Raw sql methods
   Future getAllEvents() async {
-    String sql = 'SELECT * FROM $tableName';
     final Database db = await initializeDB();
-    // var fResponse = await db.query(table)
-    var qResponse = await db.rawQuery(sql);
-    if (qResponse != null) {
-      return qResponse;
-    }
-  }
-
-  Future addEvent(Map rowData) async {
-    String sql = 'INSERT INTO $tableName(eventName, eventTime) VALUES()';
-    final Database db = await initializeDB();
-    var qReponse = await db.rawInsert(sql);
-    if (qReponse != null) {
-      return qReponse;
+    if (db != null) {
+      String sql = 'SELECT * FROM $tableName';
+      return await db.rawQuery(sql);
+      // print(await db.rawQuery(sql));
+      // Response type => Future<List<Map<String, dynamic>>>
     } else {
-      print('Database query failed!');
+      print('SQL SELECT query returned an error!');
     }
   }
 
-  Future updateEvent(int rowId, Map rowData) async {
-    String sql = 'UPDATE $tableName SET abc = xyz';
+  Future getOneEvent(int rowId) async {
     final Database db = await initializeDB();
-    var qResult = await db.rawUpdate(sql);
-    if (qResult != null) {
-      return qResult;
+    // var qResult = await db.rawQuery(sql);
+    if (db != null) {
+      String sql = 'SELECT * FROM $tableName WHERE eventId = $rowId';
+      await db.rawQuery(sql);
+      print(await db.rawQuery(sql));
     } else {
-      print('Database query failed!');
+      print('SQL SELECT query returned an error!');
     }
   }
 
-  deleteEvent(int rowId) async {
+  Future<void> addEvent(String eName, String eTime) async {
+    final Database db = await initializeDB();
+    // var qResult = await db.rawInsert(sql);
+    if (db != null) {
+      String sql =
+          'INSERT INTO $tableName(eventName, eventTime) VALUES("$eName", "$eTime")';
+      await db.rawInsert(sql);
+    } else {
+      print('SQL INSERT query returned an error!');
+    }
+  }
+
+  Future<void> updateEvent(int rowId, String eTime) async {
+    final Database db = await initializeDB();
+    // var qResult = await db.rawUpdate(sql);
+    if (db != null) {
+      String sql =
+          'UPDATE $tableName SET eventTime = "$eTime" WHERE id = $rowId';
+      await db.rawUpdate(sql);
+    } else {
+      print('SQL UPDATE query returned an error');
+    }
+  }
+
+  Future deleteEvent(int rowId) async {
     String sql = 'DELETE FROM $tableName WHERE id = $rowId';
     final Database db = await initializeDB();
     var qResult = await db.rawDelete(sql);
     if (qResult != null) {
       return qResult;
     } else {
-      print('Database query failed!');
+      print('SQL DELETE query returned an error');
     }
   }
 
   deleteTable(String tableName) {}
 
   // Helper sqflite methods
-
   Future<List<EventModel>> getAllRows() async {
     final Database db = await initializeDB();
     final List<Map<String, dynamic>> eventList = await db.query(tableName);
     return List.generate(eventList.length, (index) {
       return EventModel(
-          eventId: eventList[index]['eventId'],
+          id: eventList[index]['id'],
           eventName: eventList[index]['eventName'],
           eventTime: eventList[index]['eventTime']);
     });
   }
 
-  Future<void> insertEvent(EventModel event) async {
+  Future<void> addRow(EventModel event) async {
     final Database db = await initializeDB();
     await db.insert(tableName, event.toMap(),
         conflictAlgorithm: ConflictAlgorithm.replace);
+  }
+
+  Future<void> updateRow(EventModel event) async {
+    final Database db = await initializeDB();
+    await db.update(tableName, event.toMap(),
+        where: 'id = ?', whereArgs: [event.id]);
   }
 }
 
