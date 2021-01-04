@@ -18,7 +18,7 @@ class HttpRequestHandler {
       return reqResponse;
     } else {
       print(reqResponse.statusCode);
-      return 'Request failed!';
+      return null;
     }
   }
 
@@ -26,21 +26,4 @@ class HttpRequestHandler {
     var postRequest = await post(reqUrl, headers: reqHeaders, body: reqPayload);
     return postRequest;
   }
-
-  parseHttpResponse(dynamic httpResponseData) {
-    var parsedData = jsonDecode(httpResponseData);
-    return parsedData;
-  }
-}
-
-class UrlOpener {
-
-  launchUrl(String targetUrl) async{
-    if (await canLaunch(targetUrl)) {
-      await launch(targetUrl);
-    }else {
-      print('Could not launch $targetUrl');
-      }
-  }
-  
 }

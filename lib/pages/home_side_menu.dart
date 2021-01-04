@@ -4,6 +4,7 @@ import '../pages/page2.dart';
 import '../pages/auto_timing_page.dart';
 import '../pages/timing_data_page.dart';
 import '../pages/news_page.dart';
+import '../pages/xml_reader_page.dart';
 import '../pages/form_page.dart';
 import 'crypto_page.dart';
 import '../services/router.dart';
@@ -39,6 +40,13 @@ class NavDrawer extends StatelessWidget {
             title: Text('Go to news page'),
             onTap: () => {
               PageRouter().navigateToPage(NewsPage(), context),
+            },
+          ),
+          ListTile(
+            leading: Icon(Icons.view_headline),
+            title: Text('Go to xml reader page'),
+            onTap: () => {
+              PageRouter().navigateToPage(XmlReaderPage(), context),
             },
           ),
           ListTile(
